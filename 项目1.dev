@@ -71,7 +71,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit6]
-FileName=map.cpp
+FileName=MAP.cpp
 CompileCpp=1
 Folder=
 Compile=1
@@ -101,7 +101,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit9]
-FileName=map.h
+FileName=MAP.h
 CompileCpp=1
 Folder=
 Compile=1

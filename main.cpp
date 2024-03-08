@@ -1,5 +1,5 @@
 #include <bits/stdc++.h>
-#included<map.h> 
+#include"MAPPA.h" 
 using namespace std;
 
 const int n = 200;const int robot_num = 10;
@@ -83,7 +83,7 @@ int Input()
 int main()
 {
     Init(); 
-    map new Map;
+    MAPPA Map;
     for(int zhen = 1; zhen <= 15000; zhen ++)
     {
         int id = Input();
