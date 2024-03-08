@@ -2,7 +2,7 @@
 #include <vector>
 #include <string>
 #include <queue>
-#include "map.h"
+#include "MAPPA.h"
 
 using namespace std;
 
@@ -37,7 +37,7 @@ public:
         //to do
     }
 
-    string find_path(Map* map)
+    string find_path(MAPPA* map);
 
 
 };

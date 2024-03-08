@@ -2,4 +2,4 @@
 class map{
     public:
     //qwq
-}
+};
