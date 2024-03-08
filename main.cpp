@@ -1,8 +1,8 @@
 #include <bits/stdc++.h>
+#included<map.h> 
 using namespace std;
 
-const int n = 200;
-const int robot_num = 10;
+const int n = 200;const int robot_num = 10;
 const int berth_num = 10;
 const int N = 210;
 
@@ -49,7 +49,7 @@ void Init()
     {
         int id;
         scanf("%d", &id);
-        scanf("%d%d%d%d", &berth[id].x, &berth[id].y, &berth[id].transport_time, &berth[id].loading_speed);
+        scanf("''%d%d%d%d", &berth[id].x, &berth[id].y, &berth[id].transport_time, &berth[id].loading_speed);
     }
     scanf("%d", &boat_capacity);
     char okk[100];
@@ -60,7 +60,7 @@ void Init()
 
 int Input()
 {
-    scanf("%d%d", &id, &money);
+    scanf("%d%d", &id, &money);//当前帧数，选手的钱 
     int num;
     scanf("%d", &num);
     for(int i = 1; i <= num; i ++)
@@ -82,7 +82,8 @@ int Input()
 
 int main()
 {
-    Init();
+    Init(); 
+    map new Map;
     for(int zhen = 1; zhen <= 15000; zhen ++)
     {
         int id = Input();
@@ -91,6 +92,6 @@ int main()
         puts("OK");
         fflush(stdout);
     }
-
+	
     return 0;
 }
