@@ -2,7 +2,6 @@
 #include <vector>
 #include <string>
 #include <queue>
-#include "map.cpp"
 #include "map.h"
 
 using namespace std;
