@@ -1,6 +1,6 @@
 [Project]
-FileName=项目1.dev
-Name=项目1
+FileName=锟斤拷目1.dev
+Name=锟斤拷目1
 Type=0
 Ver=2
 ObjFiles=
@@ -29,7 +29,7 @@ IncludeVersionInfo=0
 SupportXPThemes=0
 CompilerSet=1
 CompilerSettings=0000000000000000001000000
-UnitCount=11
+UnitCount=13
 
 [VersionInfo]
 Major=1
@@ -71,7 +71,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit6]
-FileName=MAP.cpp
+FileName=MAPPA.cpp
 CompileCpp=1
 Folder=
 Compile=1
@@ -101,7 +101,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit9]
-FileName=MAP.h
+FileName=MAPPA.h
 CompileCpp=1
 Folder=
 Compile=1
@@ -152,6 +152,26 @@ BuildCmd=
 
 [Unit2]
 FileName=main.cpp
+CompileCpp=1
+Folder=
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit12]
+FileName=Dot.h
+CompileCpp=1
+Folder=
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit13]
+FileName=GoodsManager.h
 CompileCpp=1
 Folder=
 Compile=1
