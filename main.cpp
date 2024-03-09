@@ -19,7 +19,7 @@ struct Robot
         y = startY;
     }
 }robot[robot_num + 10];
-
+/*
 struct Berth
 {
     int x;
@@ -34,7 +34,7 @@ struct Berth
         this -> loading_speed = loading_speed;
     }
 }berth[berth_num + 10];
-
+*/
 
 int money, boat_capacity, id;
 char ch[N][N];
