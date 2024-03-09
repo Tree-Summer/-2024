@@ -1,4 +1,6 @@
 #include<iostream>
+#include"bowei.h"
+#include"ship.h"
 using namespace std;
 
 const int n = 200;
@@ -33,10 +35,6 @@ struct Berth
     }
 }berth[berth_num + 10];
 
-struct Boat
-{
-    int num, pos, status;
-}boat[10];
 
 int money, boat_capacity, id;
 char ch[N][N];
@@ -72,9 +70,18 @@ int Input()
     {
         int sts;
         scanf("%d%d%d%d", &robot[i].goods, &robot[i].x, &robot[i].y, &sts);
+
     }
-    for(int i = 0; i < 5; i ++)
+    for(int i = 0; i < 5; i ++){
         scanf("%d%d\n", &boat[i].status, &boat[i].pos);
+
+        //
+        boat[i].boweiid = boat[i].pos;
+        berth[boat[i].boweiid].boatid = i;
+        //
+
+    }
+
     char okk[100];
     scanf("%s", okk);
     return id;

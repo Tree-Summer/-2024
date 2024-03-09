@@ -1,4 +1,6 @@
-//地图类,支持使用交互
+//锟斤拷图锟斤拷,支锟斤拷使锟矫斤拷锟斤拷
+
+//瀵逛簬鍦板浘涓庢硦浣嶇殑浜や簰
 #include "Dot.h"
 #include "GoodsManager.h"
 class MAPPA{

@@ -7,6 +7,9 @@ bool beside(Step* a, Step* b){ //判断相邻
     else
         return false;
 }
+
+//机器人的取物简单逻辑
+
 /*
 string Robot::find_path(Map *map) {
     queue<Step*> queue1;
