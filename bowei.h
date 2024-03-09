@@ -21,5 +21,6 @@ class Berth
         this -> boatid = -1;
         //for(int i=0;i<11;i++) this -> boatid[i] = -1;
     }
+};
 
-}berth[20];
+Berth berth[20];

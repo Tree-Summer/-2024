@@ -1,5 +1,4 @@
 #include<iostream>
-#include"bowei.h"
 #include"ship.h"
 using namespace std;
 
@@ -19,26 +18,12 @@ struct Robot
         y = startY;
     }
 }robot[robot_num + 10];
-/*
-struct Berth
-{
-    int x;
-    int y;
-    int transport_time;
-    int loading_speed;
-    Berth(){}
-    Berth(int x, int y, int transport_time, int loading_speed) {
-        this -> x = x;
-        this -> y = y;
-        this -> transport_time = transport_time;
-        this -> loading_speed = loading_speed;
-    }
-}berth[berth_num + 10];
-*/
 
-int money, boat_capacity, id;
+
+int money, id;
 char ch[N][N];
 int gds[N][N];
+
 void Init()
 {
     for(int i = 1; i <= n; i ++)
