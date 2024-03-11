@@ -1,6 +1,8 @@
-#include "ship.h"
-#include "bowei.h"
-#include "robot.h"
+#ifndef Dot_H_H
+#define Dot_H_H
+#pragma once
+
+#include "boat.h"
 class Dot{
 	public:
 		int type;
@@ -11,4 +13,9 @@ class Dot{
 		//4:bowei
 		//5:ship
 		int x,y,val,t;
+		Dot(){
+			printf("Dot init\n");
+		}
 };
+
+#endif

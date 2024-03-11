@@ -1,7 +1,11 @@
+#ifndef robot_H_H
+#define robot_H_H
+#pragma once
 #include <iostream>
 #include <vector>
 #include <string>
 #include <queue>
+#include "Dot.h"
 using namespace std;
 class Robot
 {
@@ -35,47 +39,47 @@ public:
         return 1;
     }
 
-  //  string find_path(MAPPA* map);
+    string find_path(Dot * d);
   //注释掉了，可以在MAPPA里面实现
   //或者调用MAPPA里面的一些别的文件实现
 
 };
 
-class Robots
-{
-public:
-    vector<Robot*> list;    //存储机器人列表
+// class Robots
+// {
+// public:
+//     vector<Robot*> list;    //存储机器人列表
 
-    void push(Robot* r){
-        list.push_back(r);
-    }
+//     void push(Robot* r){
+//         list.push_back(r);
+//     }
 
-    void init(){
-        if (list.empty()){    //第一次初始化
-            for(int i = 0;i < 10; i++){
-                int carry, x, y, state;
-                scanf("%d%d%d%d", &carry, &x, &y, &state);
-                getchar();
-                Robot* robot = new Robot(x, y, carry, state, i);
-                list.push_back(robot);
-            }
-        }
-        else{                //后续更新
-            for(int i = 0;i < list.size(); i++){
-                Robot* robot = list[i];
-                int x,y,state,carry;
-                scanf("%d%d%d%d", &carry, &x, &y, &state);
-                getchar();
-                robot->x = x;
-                robot->y = y;
-                robot->carry = carry;
-                robot->state = state;
-            }
-        }
+//     void init(){
+//         if (list.empty()){    //第一次初始化
+//             for(int i = 0;i < 10; i++){
+//                 int carry, x, y, state;
+//                 scanf("%d%d%d%d", &carry, &x, &y, &state);
+//                 getchar();
+//                 Robot* robot = new Robot(x, y, carry, state, i);
+//                 list.push_back(robot);
+//             }
+//         }
+//         else{                //后续更新
+//             for(int i = 0;i < list.size(); i++){
+//                 Robot* robot = list[i];
+//                 int x,y,state,carry;
+//                 scanf("%d%d%d%d", &carry, &x, &y, &state);
+//                 getchar();
+//                 robot->x = x;
+//                 robot->y = y;
+//                 robot->carry = carry;
+//                 robot->state = state;
+//             }
+//         }
 
-    }
+//     }
 
-};
+// };
 
 class Step
 {
@@ -88,3 +92,4 @@ public:
         this->dist = dist;
     }
 };
+#endif

@@ -1,3 +1,6 @@
+#ifndef GoodsManager_H_H
+#define GoodsManager_H_H
+#pragma once
 class GoodsManager{
 	public:
 		int front,end;
@@ -8,3 +11,4 @@ class GoodsManager{
 		int G[10005][2];
 		const int size=10001;
 };
+#endif

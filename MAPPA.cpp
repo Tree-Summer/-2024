@@ -28,10 +28,6 @@ void MAPPA::init(){//初始化
     scanf("%s", okk);
     printf("OK\n");
     fflush(stdout);
-
-}
-void MAPPA::change(){
-	
 }
 int MAPPA::input(){//交互
 	scanf("%d%d",&zhen,&money);
@@ -49,9 +45,7 @@ int MAPPA::input(){//交互
 	}
 	    for(int i = 0; i < robot_num; i ++)
     {
-        int sts;
         scanf("%d%d%d%d", &robot[i].carry, &robot[i].x, &robot[i].y, &robot[i].state);
-
     }
     for(int i = 0; i < 5; i ++){
         scanf("%d%d\n", &boat[i].status, &boat[i].pos);
@@ -62,7 +56,7 @@ int MAPPA::input(){//交互
     scanf("%s", okk);
     return zhen;
 }
-void MAPPA::vanish(){
+void MAPPA::vanish(){//货物消失逻辑
 	for(int i=gm.front;i!=gm.end;i++){
 		i=i%gm.size;
 		int x=gm.G[i][0],y=gm.G[i][1];
@@ -74,7 +68,10 @@ void MAPPA::vanish(){
 		else break;
 	} 
 }
-void MAPPA::output(){
+void MAPPA::deal(){
+	printf("MAPPA deal");
+}
+void MAPPA::output(){//输出
 	for(int i = 0; i < robot_num; i ++)
             printf("move %d %d\n", i, rand() % 4);
         puts("OK");
