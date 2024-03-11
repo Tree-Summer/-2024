@@ -1,8 +1,4 @@
-#include"bowei.h"
-using namespace std;
-
-int boat_capacity;
-
+#include <iostream>
 class Boat
 {
     public:
@@ -17,13 +13,13 @@ class Boat
 //
 
     void ship(int id,int nowtime);
-    void go(int nowtime);
+    // void go(int nowtime,int boat_capacity,Berth *berth);
     void statuschange(int nowtime);
     void backtoberth(int nowtime);
     
 };
 
-Boat boat[5];
+
 
 // change the berth
 void Boat::ship(int berthid,int nowtime){
@@ -33,19 +29,19 @@ void Boat::ship(int berthid,int nowtime){
 }
 
 // go to virtual point
-void Boat::go(int nowtime){
-    if(num==boat_capacity){
-        time = nowtime +berth[pos].transport_time;
-        status =0,pos =-1;
-   }
-}
+// void Boat::go(int nowtime,int boat_capacity,Berth *berth){
+//     if(num==boat_capacity){
+//         time = nowtime +berth[pos].transport_time;
+//         status =0,pos =-1;
+//    }
+// }
 
 // from virtual point back to berth(stable)
-void Boat::backtoberth(int nowtime){
-    num = 0;
-    time = nowtime+ berth[boweiid].transport_time;
-    status =0,pos =boweiid;
-}
+// void Boat::backtoberth(int nowtime,Berth *berth){
+//     num = 0;
+//     time = nowtime+ berth[boweiid].transport_time;
+//     status =0,pos =boweiid;
+// }
 
 //if the boat succeed to reach the goal
 void Boat::statuschange(int nowtime){

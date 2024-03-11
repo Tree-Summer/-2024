@@ -1,5 +1,3 @@
-#include<iostream>
-
 class Berth
 {
     public:
@@ -23,4 +21,4 @@ class Berth
     }
 };
 
-Berth berth[20];
+

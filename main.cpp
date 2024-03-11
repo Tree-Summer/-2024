@@ -1,29 +1,18 @@
 #include<iostream>
-#include"ship.h"
+#include"MAPPA.h"
 using namespace std;
-
-const int n = 200;
-const int robot_num = 10;
-const int berth_num = 10;
-const int N = 210;
-
-struct Robot
-{
-    int x, y, goods;
-    int status;
-    int mbx, mby;
-    Robot() {}
-    Robot(int startX, int startY) {
-        x = startX;
-        y = startY;
-    }
-}robot[robot_num + 10];
-
-
-int money, id;
-char ch[N][N];
-int gds[N][N];
-
+// struct Robot
+// {
+//     int x, y, goods;
+//     int status;
+//     int mbx, mby;
+//     Robot() {}
+//     Robot(int startX, int startY) {
+//         x = startX;
+//         y = startY;
+//     }
+// }robot[robot_num + 10];
+/*
 void Init()
 {
     for(int i = 1; i <= n; i ++)
@@ -40,48 +29,47 @@ void Init()
     printf("OK\n");
     fflush(stdout);
 }
+*/
+// int Input()
+// {
+//     scanf("%d%d", &id, &money);
+//     int num;
+//     scanf("%d", &num);
+//     for(int i = 1; i <= num; i ++)
+//     {
+//         int x, y, val;
+//         scanf("%d%d%d", &x, &y, &val);
+//     }
+//     for(int i = 0; i < robot_num; i ++)
+//     {
+//         int sts;
+//         scanf("%d%d%d%d", &robot[i].goods, &robot[i].x, &robot[i].y, &sts);
 
-int Input()
-{
-    scanf("%d%d", &id, &money);
-    int num;
-    scanf("%d", &num);
-    for(int i = 1; i <= num; i ++)
-    {
-        int x, y, val;
-        scanf("%d%d%d", &x, &y, &val);
-    }
-    for(int i = 0; i < robot_num; i ++)
-    {
-        int sts;
-        scanf("%d%d%d%d", &robot[i].goods, &robot[i].x, &robot[i].y, &sts);
+//     }
+//     for(int i = 0; i < 5; i ++){
+//         scanf("%d%d\n", &boat[i].status, &boat[i].pos);
 
-    }
-    for(int i = 0; i < 5; i ++){
-        scanf("%d%d\n", &boat[i].status, &boat[i].pos);
+//         //
+//         boat[i].boweiid = boat[i].pos;
+//         berth[boat[i].boweiid].boatid = i;
+//         //
 
-        //
-        boat[i].boweiid = boat[i].pos;
-        berth[boat[i].boweiid].boatid = i;
-        //
+//     }
 
-    }
-
-    char okk[100];
-    scanf("%s", okk);
-    return id;
-}
+//     char okk[100];
+//     scanf("%s", okk);
+//     return id;
+// }
 
 int main()
 {
-    Init();
+    MAPPA m;
+    m.init();
     for(int zhen = 1; zhen <= 15000; zhen ++)
     {
-        int id = Input();
-        for(int i = 0; i < robot_num; i ++)
-            printf("move %d %d\n", i, rand() % 4);
-        puts("OK");
-        fflush(stdout);
+        m.input();
+        //int id = Input();
+        m.output();
     }
 
     return 0;

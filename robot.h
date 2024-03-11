@@ -2,20 +2,16 @@
 #include <vector>
 #include <string>
 #include <queue>
-#include "MAPPA.h"
-
 using namespace std;
-
-
 class Robot
 {
 public:
     int id;
     int x;
     int y;
-    int carry;
-    int state;
-
+    int carry;//robot是否携带货物
+    int state;//robot是否是正常状态
+    Robot(){};
     Robot(int x, int y, int carry, int state, int id){      //初始化
         this->id = id;
         this->x = x;
@@ -31,14 +27,17 @@ public:
 
     bool get(){                                             //抓取货物
         //to do
+        return 1;
     }
 
     bool pull() {                                            //放置货物
         //to do
+        return 1;
     }
 
-    string find_path(MAPPA* map);
-
+  //  string find_path(MAPPA* map);
+  //注释掉了，可以在MAPPA里面实现
+  //或者调用MAPPA里面的一些别的文件实现
 
 };
 

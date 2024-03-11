@@ -1,3 +1,6 @@
+#include "ship.h"
+#include "bowei.h"
+#include "robot.h"
 class Dot{
 	public:
 		int type;
