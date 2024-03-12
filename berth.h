@@ -27,6 +27,7 @@ class Berth
             for(int j=1;j<=20;j++)
                 dis[i][j]=maxn;
         this -> boatid = -1;
+        this->value=0;
    }
    ~Berth(){
     delete(dis);
