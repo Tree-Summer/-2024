@@ -15,6 +15,7 @@ public:
     int y;
     int carry;//robot是否携带货物
     int state;//robot是否是正常状态
+    string path;
     Robot(){};
     Robot(int x, int y, int carry, int state, int id){      //初始化
         this->id = id;
@@ -23,7 +24,7 @@ public:
         this->carry = carry;
         this->state = state;
     }
-
+    Berth *find_berth(Berth *berth);
     void move(int dir) {                                    //输出移动
         printf("move ");
         printf("%d %d", id, dir);
@@ -39,7 +40,7 @@ public:
         return 1;
     }
 
-    string find_path(Dot** dotmap, int ** bowei_dist);
+    string find_path(Dot** dotmap,  Berth *berth);
 
     void move();                                    //输出移动
   //注释掉了，可以在MAPPA里面实现
