@@ -99,8 +99,11 @@ int MAPPA::input(){//读入交互
     }
     for(int i = 0; i < 5; i ++){
         scanf("%d%d\n", &boat[i].status, &boat[i].pos);
+		//
         boat[i].boweiid = boat[i].pos;
         berth[boat[i].boweiid].boatid = i;
+		//
+		if(zhen==1) berth[boat[i].pos].space += boat_capacity;
     }
     char okk[100];
     scanf("%s", okk);
