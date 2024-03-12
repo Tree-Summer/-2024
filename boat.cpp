@@ -38,7 +38,7 @@ void Boat::statuschange(int nowtime,int boat_capacity,Berth *berth){
     //if(time==nowtime) status = 1;
 
     //from virtual point back to berth(stable)
-    if(pos==-1&&time==nowtime){ 
+    if(pos==-1&&time==nowtime){
         num = 0;
         time = nowtime+ berth[boweiid].transport_time;
         berth[boweiid].space+=boat_capacity;
