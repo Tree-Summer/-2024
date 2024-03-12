@@ -11,10 +11,12 @@ class Boat
     int num;//num of goods
     int pos;//bowei id
     int status;//0--moving  1-- over  2--waiting
+
     int time;//
+
     int boweiid;
-    void ship(int id,int nowtime);
-    void go(int nowtime,int boat_capacity,Berth *berth);
-    void statuschange(int nowtime,Berth *berth);
+    void ship(int nowtime,int boat_capacity,Berth *berth);
+     void go(int nowtime,int boat_capacity,Berth *berth);
+    void statuschange(int nowtime,int boat_capacity,Berth *berth);
 };
 #endif
