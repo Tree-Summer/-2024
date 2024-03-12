@@ -73,6 +73,12 @@ build CMakeFiles/wyl_git.dir/MAPPA.cpp.obj: CXX_COMPILER__wyl_git_Debug C$:/User
   OBJECT_DIR = CMakeFiles\wyl_git.dir
   OBJECT_FILE_DIR = CMakeFiles\wyl_git.dir
 
+build CMakeFiles/wyl_git.dir/berth.cpp.obj: CXX_COMPILER__wyl_git_Debug C$:/Users/93211/Desktop/wyl_git/berth.cpp || cmake_object_order_depends_target_wyl_git
+  DEP_FILE = CMakeFiles\wyl_git.dir\berth.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\wyl_git.dir
+  OBJECT_FILE_DIR = CMakeFiles\wyl_git.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target wyl_git
@@ -81,7 +87,7 @@ build CMakeFiles/wyl_git.dir/MAPPA.cpp.obj: CXX_COMPILER__wyl_git_Debug C$:/User
 #############################################
 # Link the executable wyl_git.exe
 
-build wyl_git.exe: CXX_EXECUTABLE_LINKER__wyl_git_Debug CMakeFiles/wyl_git.dir/main.cpp.obj CMakeFiles/wyl_git.dir/robot.cpp.obj CMakeFiles/wyl_git.dir/boat.cpp.obj CMakeFiles/wyl_git.dir/MAPPA.cpp.obj
+build wyl_git.exe: CXX_EXECUTABLE_LINKER__wyl_git_Debug CMakeFiles/wyl_git.dir/main.cpp.obj CMakeFiles/wyl_git.dir/robot.cpp.obj CMakeFiles/wyl_git.dir/boat.cpp.obj CMakeFiles/wyl_git.dir/MAPPA.cpp.obj CMakeFiles/wyl_git.dir/berth.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\wyl_git.dir

@@ -11,12 +11,12 @@ bool beside(Step* a, Step* b){ //判断相邻
 
 
 
- string Robot::find_path(Dot** dotmap, Berth * bowei) {
+ string Robot::find_good(Dot** dotmap, Berth * bowei) {
      int ** bowei_dist = bowei->dis;
      queue<Step*> queue1;
      vector<Step*> vector1;
      vector<Step*> vector2;
-     string path;
+     string road;
      int rec[200][200];  //记录足迹
      Step* step = new Step(this->x, this->y, 0);
      rec[this->x][this->y] = 1;
@@ -70,139 +70,89 @@ bool beside(Step* a, Step* b){ //判断相邻
          int y2 = vector2[i-1]->y;
 
          if((x2-x1) == 1 && (y2-y1) == 0){
-             path.push_back('0');
+             road.push_back('0');
          }
          else if((x2-x1) == -1 && (y2-y1) == 0){
-             path.push_back('1');
+             road.push_back('1');
          }
          else if((x2-x1) == 0 && (y2-y1) == 1){
-             path.push_back('3');
+             road.push_back('3');
          }
          else if((x2-x1) == 0 && (y2-y1) == -1){
-             path.push_back('2');
+             road.push_back('2');
          }
      }
 
-     Step* point = vector1[vector1.size()-1];
-
-     while(dotmap[point->x][point->y].type != 4){
-         int x_pos, y_pos;
-         int delta_x[4] = {1, 0, -1, 0};
-         int delta_y[4] = {0, 1, 0, -1};
-         for(int i = 0;i < 4; i++) {
-             x_pos = point->x + delta_x[i];
-             y_pos = point->y + delta_y[i];
-             if (dotmap[x_pos][y_pos].type != 1 && dotmap[x_pos][y_pos].type != 2) {
-                 if (bowei_dist[x_pos][y_pos] == bowei_dist[point->x][point->y] - 1) {
-                     path.push_back('0');
-                     point->x = x_pos;
-                     point->y = y_pos;
-                     break;
-                 }
-             }
-         }
-     }
-     return path;
+     this->path = road;
+     return road;
 
 }
 
+
+string Robot::find_berth(Dot** dotmap, Berth *berth) {
+    Step* point = new Step(this->x, this->y, 0);
+    int ** bowei_dist = berth->dis;
+    string road;
+
+    while(dotmap[point->x][point->y].type != 4){
+        int x_pos, y_pos;
+        int delta_x[4] = {1, 0, -1, 0};
+        int delta_y[4] = {0, 1, 0, -1};
+        for(int i = 0;i < 4; i++) {
+            x_pos = point->x + delta_x[i];
+            y_pos = point->y + delta_y[i];
+            if ( x_pos >= 0 && x_pos < 200 && y_pos >= 0 && y_pos < 200 && dotmap[x_pos][y_pos].type != 1 && dotmap[x_pos][y_pos].type != 2 ) {
+                if (bowei_dist[x_pos][y_pos] == bowei_dist[point->x][point->y] - 1) {
+                    if(i == 0){
+                        road.push_back('0');
+                    }
+                    else if(i == 1){
+                        road.push_back('3');
+                    }
+                    else if(i == 2){
+                        road.push_back('1');
+                    }
+                    else if(i == 3){
+                        road.push_back('2');
+                    }
+                    point->x = x_pos;
+                    point->y = y_pos;
+                    break;
+                }
+            }
+        }
+    }
+    this->path = road;
+    return road;
+}
+
+
+void Robot::operate(Dot **dotmap, Berth* berth) {
+    if(this->x == this->tar_x && this->y == this->tar_y){
+        if(dotmap[this->x][this->y].type == 3 && this->carry == 0){
+            printf("get ");
+            printf("%d\n", this->id);
+            fflush(stdout);
+            dotmap[this->x][this->y].type = 0;
+            this->carry = 1;
+        }
+        else if(dotmap[this->x][this->y].type == 4 && this->carry == 1){
+            printf("pull ");
+            printf("%d\n", id);
+            berth->value += 1;
+            fflush(stdout);
+            this->carry = 0;
+        }
+    }
+}
 
 void Robot::move() {
     printf("move ");
     printf("%d ", this->id);
     printf("%c\n", this->path[0]);
+    fflush(stdout);
     path.erase(path.begin());
 }
 
-//机器人的取物简单逻辑
 
 
-// string Robot::find_path(Map *map) {
-//     queue<Step*> queue1;
-//     vector<Step*> vector1;
-//     string path;
-//     int rec[200][200];  //记录足迹
-//     Point* u = new Point(this->x, this->y, 1);
-//     Step* step = new Step(u->x, u->y, 0);
-//     rec[this->x][this->y] = 1;
-//     queue1.push(step);
-//     vector1.push_back(step);
-//     int distance = 0;
-
-//     //寻找第一个货物
-//     while(!queue1.empty()){
-//         Step* s = queue1.front();
-//         queue1.pop();
-//         //
-//         int x_pos = s->x + 1;
-//         int y_pos = s->y;
-//         if(x_pos >= 0 && x_pos < 200 && y_pos >= 0 && y_pos < 200){
-//             if(map->cnt[x_pos][y_pos]->type == 1 && rec[x_pos][y_pos] == 0){   //type==1 陆地
-//                 Step* step1 = new Step(x_pos, y_pos, s->dist+1);
-//                 queue1.push(step1);
-//                 vector1.push_back(step1);
-//                 rec[x_pos][y_pos] = 1;
-//             }
-//             else if(map->cnt[x_pos][y_pos]->type == 3 && rec[x_pos][y_pos] == 0){ //type==3 货物
-//                 Step* end_step = new Step(x_pos, y_pos, s->dist + 1);
-//                 vector1.push_back(end_step);
-//                 queue1.push(end_step);
-//                 break;
-//             }
-//         }
-//         //
-//         x_pos = s->x - 1;
-//         y_pos = s->y;
-//         if(x_pos >= 0 && x_pos < 200 && y_pos >= 0 && y_pos < 200){
-//             if(map->cnt[x_pos][y_pos]->type == 1 && rec[x_pos][y_pos] == 0){
-//                 Step* step2 = new Step(x_pos, y_pos, s->dist+1);
-//                 queue1.push(step2);
-//                 vector1.push_back(step2);
-//                 rec[x_pos][y_pos] = 1;
-//             }
-//             else if(map->cnt[x_pos][y_pos]->type == 3 && rec[x_pos][y_pos] == 0){
-//                 Step* end_step = new Step(x_pos, y_pos, s->dist + 1);
-//                 vector1.push_back(end_step);
-//                 queue1.push(end_step);
-//                 break;
-//             }
-//         }
-//         //
-//         x_pos = s->x;
-//         y_pos = s->y + 1;
-//         if(x_pos >= 0 && x_pos < 200 && y_pos >= 0 && y_pos < 200){
-//             if(map->cnt[x_pos][y_pos]->type == 1 && rec[x_pos][y_pos] == 0){
-//                 Step* step3 = new Step(x_pos, y_pos, s->dist+1);
-//                 queue1.push(step3);
-//                 vector1.push_back(step3);
-//                 rec[x_pos][y_pos] = 1;
-//             }
-//             else if(map->cnt[x_pos][y_pos]->type == 3 && rec[x_pos][y_pos] == 0){
-//                 Step* end_step = new Step(x_pos, y_pos, s->dist + 1);
-//                 vector1.push_back(end_step);
-//                 queue1.push(end_step);
-//                 break;
-//             }
-//         }
-//         //
-//         x_pos = s->x;
-//         y_pos = s->y - 1;
-//         if(x_pos >= 0 && x_pos < 200 && y_pos >= 0 && y_pos < 200){
-//             if(map->cnt[x_pos][y_pos]->type == 1 && rec[x_pos][y_pos] == 0){
-//                 Step* step4 = new Step(x_pos, y_pos, s->dist+1);
-//                 queue1.push(step4);
-//                 vector1.push_back(step4);
-//                 rec[x_pos][y_pos] = 1;
-//             }
-//             else if(map->cnt[x_pos][y_pos]->type == 3 && rec[x_pos][y_pos] == 0){
-//                 Step* end_step = new Step(x_pos, y_pos, s->dist + 1);
-//                 vector1.push_back(end_step);
-//                 queue1.push(end_step);
-//                 break;
-//             }
-//         }
-//         //
-//     }
-//     Step* destination = vector1[vector1.size()-1];
-    
-// }

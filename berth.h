@@ -6,7 +6,6 @@
 using namespace std;
 #include <queue>
 
-#include "dot.h"
 class Berth
 {
     public:
