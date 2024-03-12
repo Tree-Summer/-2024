@@ -25,7 +25,7 @@ public:
         this->state = state;
 
     }
-
+    Berth *find_berth(Berth *berth);
     void move(int dir) {                                    //输出移动
         printf("move ");
         printf("%d %d", id, dir);
@@ -41,7 +41,7 @@ public:
         return 1;
     }
 
-    string find_path(Dot** dotmap, int ** bowei_dist);
+    string find_path(Dot** dotmap,  Berth *berth);
 
     void move();                                    //输出移动
   //注释掉了，可以在MAPPA里面实现

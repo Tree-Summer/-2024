@@ -11,7 +11,8 @@ bool beside(Step* a, Step* b){ //判断相邻
 
 
 
- string Robot::find_path(Dot** dotmap, int ** bowei_dist) {
+ string Robot::find_path(Dot** dotmap, Berth * bowei) {
+     int ** bowei_dist = bowei->dis;
      queue<Step*> queue1;
      vector<Step*> vector1;
      vector<Step*> vector2;
