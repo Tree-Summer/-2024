@@ -15,6 +15,7 @@ public:
     int y;
     int carry;//robot是否携带货物
     int state;//robot是否是正常状态
+    string path;
     Robot(){};
     Robot(int x, int y, int carry, int state, int id){      //初始化
         this->id = id;
@@ -22,6 +23,7 @@ public:
         this->y = y;
         this->carry = carry;
         this->state = state;
+
     }
 
     void move(int dir) {                                    //输出移动
