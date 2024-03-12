@@ -5,7 +5,7 @@ using namespace std;
 int main()
 {
     MAPPA m;
-    printf("a");
+    //printf("a");
     m.init();
     for(int zhen = 1; zhen <= 15000; zhen ++)
     {
