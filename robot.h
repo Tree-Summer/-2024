@@ -25,7 +25,7 @@ public:
         this->y = y;
         this->carry = carry;
         this->state = state;
-
+        
     }
     string find_berth(Dot** dotmap, Berth *berth);
     void move(int dir) {                                    //输出移动
@@ -37,6 +37,7 @@ public:
 
     string find_good(Dot** dotmap, Berth *bowei);
 
+    string find_path(Dot dotmap[][201],  Berth *berth);
 
     void move();                                    //输出移动
   //注释掉了，可以在MAPPA里面实现

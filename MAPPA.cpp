@@ -122,8 +122,13 @@ void MAPPA::vanish(){//货物消失逻辑,采用循环的队列
 	} 
 }
 void MAPPA::deal(){//处理拿取货物
-	//调用船函数
 	//调用机器人函数
+	for(int i=0;i<robot_num;i++){
+		robot[i].find_path(d,robot[i].find_berth(berth));
+		robot[i].move();
+	}
+	//调用船函数
+	for(int i=0;i<)
 	//printf("MAPPA deal");
 }
 void MAPPA::output(){//输出
