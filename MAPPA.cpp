@@ -1,9 +1,47 @@
 #include"MAPPA.h"
 #include<bits/stdc++.h>
+#include<queue>
+using namespace std;
+void MAPPA::precount(int id){//预处理泊位距离
+	queue<pair<int,int> > q;
+	bool s[210][210];
+	memset(s,0,sizeof(s));//全部赋值为0
+	for(int i=0;i<=3;i++)
+		for(int j=0;j<=3;j++){
+			berth[id].dis[berth[id].x+i][berth[id].y+j]=0;
+			if(i==3||j==3){
+				q.push(make_pair(berth[id].x+i,berth[id].y+j));
+			}
+		}
+	int X[5]={0,1,0,-1,0};
+	int Y[5]={0,0,1,0,-1};
+	while(!q.empty()){
+		int x=q.front().first;
+		int y=q.front().second;
+		s[x][y]=1;
+		q.pop();
+		if(d[x][y].type==1||d[x][y].type==2) continue;
+		for(int i=1;i<=4;i++){
+			if(x+X[i]==0||x+X[i]>200) continue;
+			if(d[x+X[i]][y+Y[i]].type==1||d[x+X[i]][y+Y[i]].type==2) continue;
+			berth[id].dis[x+X[i]][y+Y[i]]=min(berth[id].dis[x+X[i]][y+Y[i]],berth[id].dis[x][y]+1);
+			if(!s[x+X[i]][y+Y[i]]){
+				q.push(make_pair(x+X[i],y+Y[i]));
+				s[x+X[i]][y+Y[i]]=1;
+			}
+		}
+	}
+	//printf("finished");
+}
 void MAPPA::predeal(){//预处理
-
+	for(int i=0;i<berth_num;i++){
+		//printf("berthid %d\n",i);
+		precount(i);
+	}
+	
 }
 void MAPPA::init(){//初始化
+	//printf("qwq");
 	char ch[210][210];
 	for(int i = 1; i <= 200; i ++)
         scanf("%s", ch[i] + 1);

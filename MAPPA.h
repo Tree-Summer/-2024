@@ -24,8 +24,9 @@ class MAPPA{
 		void vanish();
 		void output();
 		void deal();
+		void precount(int id);//预处理泊位到各个点最短距离
 		MAPPA(){
-			printf("MAPPA INIT");
+			//printf("MAPPA INIT");
 		};
 }; 
 #endif

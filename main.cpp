@@ -8,10 +8,11 @@ int main()
     m.init();
     for(int zhen = 1; zhen <= 15000; zhen ++)
     {
-        m.input();
+        int id=m.input();
         //int id = Input();
         m.deal();
         m.output();
+        zhen=id;
     }
     return 0;
 }

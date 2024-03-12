@@ -11,6 +11,7 @@ class Dot{
 		Good* good;
 		Berth* berth;
 		Boat* boat;//暂时不考虑
+		int isrobot;
 		//0:land
 		//1:sea
 		//2:hurdle
@@ -18,7 +19,7 @@ class Dot{
 		//4:bowei
 		//5:ship
 		Dot(){
-			printf("Dot init\n");
+			//printf("Dot init\n");
 		}
 		void changetype(int type){
 			if(this->type==3&&good!=NULL) delete(good);
