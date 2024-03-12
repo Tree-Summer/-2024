@@ -18,6 +18,7 @@ class MAPPA{
 		Berth berth[20];
 		Boat boat[6];
 		Robot robot[11];
+		void predeal();
 		void init();
 		int input();
 		void vanish();
