@@ -1,13 +1,20 @@
 #include<iostream>
+#include"MAPPA.h"
 #include"MAPPA.cpp"
-#include "robot.cpp"
 using namespace std;
-
-
 int main()
 {
-    Robot* test = new Robot(2, 3, 0, 1, 3);
-    test->path = "012";
-    for(int i = 0;i < 3; i++)
-        test->move();
+    MAPPA m;
+    printf("a");
+    m.init();
+    for(int zhen = 1; zhen <= 15000; zhen ++)
+    {
+        int id=m.input();
+        //int id = Input();
+        m.deal();
+        m.output();
+        zhen=id;
+    }
+    return 0;
+
 }

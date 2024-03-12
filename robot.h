@@ -15,7 +15,6 @@ public:
     int y;
     int carry;//robot是否携带货物
     int state;//robot是否是正常状态
-    string path;
     Robot(){};
     Robot(int x, int y, int carry, int state, int id){      //初始化
         this->id = id;
@@ -23,6 +22,11 @@ public:
         this->y = y;
         this->carry = carry;
         this->state = state;
+    }
+
+    void move(int dir) {                                    //输出移动
+        printf("move ");
+        printf("%d %d", id, dir);
     }
 
     bool get(){                                             //抓取货物
@@ -47,11 +51,11 @@ public:
 // {
 // public:
 //     vector<Robot*> list;    //存储机器人列表
-//
+
 //     void push(Robot* r){
 //         list.push_back(r);
 //     }
-//
+
 //     void init(){
 //         if (list.empty()){    //第一次初始化
 //             for(int i = 0;i < 10; i++){
@@ -74,9 +78,9 @@ public:
 //                 robot->state = state;
 //             }
 //         }
-//
+
 //     }
-//
+
 // };
 
 class Step
