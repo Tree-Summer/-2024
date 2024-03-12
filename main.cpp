@@ -1,5 +1,5 @@
 #include<iostream>
-//#include"MAPPA.cpp"
+#include"MAPPA.cpp"
 #include "robot.cpp"
 using namespace std;
 
