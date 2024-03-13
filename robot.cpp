@@ -27,7 +27,7 @@ void Robot::find_good(Dot dotmap[][201]) {
      bool rec[200][200];  //记录足迹
      memset(rec,0,sizeof(rec));
      Step* step = new Step(this->x, this->y, 0);
-     rec[this->x][this->y] = 1;
+     rec[this->x][this->y] = true;
      queue1.push(step);
      vector1.push_back(step);
      tar_x=-1;
@@ -47,7 +47,7 @@ void Robot::find_good(Dot dotmap[][201]) {
                      Step* step = new Step(x_pos, y_pos, s->dist+1);
                      queue1.push(step);
                      vector1.push_back(step);
-                     rec[x_pos][y_pos] = 1;
+                     rec[x_pos][y_pos] = true;
                  }
                  else if(dotmap[x_pos][y_pos].type == 3 && rec[x_pos][y_pos] == 0){
                      Step* end_step = new Step(x_pos, y_pos, s->dist + 1);
