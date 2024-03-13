@@ -18,6 +18,8 @@ public:
     int tar_x;
     int tar_y;
     int berth_id;
+    int direc;
+    int **dis;
     Good* g=NULL;
     string path;
     Robot(){};
