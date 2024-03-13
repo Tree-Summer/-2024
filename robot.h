@@ -33,7 +33,7 @@ public:
     }
     void find_berth(Berth *berth);
     void operate(Dot dotmap[][201], Berth* berth);
-    void move();
+    void move(Dot dotmap[][201]);
     bool change_good();//后期实现，用来改变货物
     void find_good(Dot dotmap[][201]);
 

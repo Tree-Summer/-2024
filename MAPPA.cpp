@@ -89,6 +89,9 @@ void MAPPA::init(){//初始化
 		int id;
         scanf("%d", &id);
         scanf("%d%d%d%d", &berth[id].x, &berth[id].y, &berth[id].transport_time, &berth[id].loading_speed);
+		berth[id].x+=1;
+		berth[id].y+=1;
+		//调整坐标
 		for(int j=0;j<=3;j++)
 			for(int k=0;k<=3;k++){
 				// if(d[berth[id].x+j][berth[id].y+k].type!=4)
@@ -114,6 +117,8 @@ int MAPPA::input(){//读入交互
 	for(int i=1;i<=num;i++){
 		int x, y, val;
         scanf("%d%d%d", &x, &y, &val);//存储货物
+		x++;
+		y++;//调整坐标
 		if(d[x][y].type!=0) continue;
 		//生成在不能取的位置则不去
         gm.end++;
@@ -129,7 +134,10 @@ int MAPPA::input(){//读入交互
 	for(int i = 0; i < robot_num; i ++)
     {
         scanf("%d%d%d%d", &robot[i].carry, &robot[i].x, &robot[i].y, &robot[i].state);
-    }
+		robot[i].x+=1;
+		robot[i].y+=1;
+		//调整坐标适应地图
+	}
     for(int i = 0; i < 5; i ++){
 		if(boat[i].berth_id!=-1)
 			berth[boat[i].berth_id].boatid = -1;
@@ -166,5 +174,7 @@ void MAPPA::deal(){//处理拿取货物
 	for(int i=0;i<boat_num;i++){
 		boat[i].move(zhen,boat_capacity,berth);
 	}
+	puts("OK");
+    fflush(stdout);
 	//printf("MAPPA deal");
 }

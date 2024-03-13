@@ -9,7 +9,8 @@ void Robot::move(Dot dotmap[][201],Berth *berth){
     //有货物的话则想办法到berth那里
     else find_good(dotmap);
     //没有货物的话找货物
-    move();
+    if(this->direc!=-1)
+        move(dotmap);
     operate(dotmap,berth);
 }
 
@@ -22,21 +23,28 @@ bool beside(Step* a, Step* b){ //判断相邻
 }
 
 void Robot::find_good(Dot dotmap[][201]) {
+    direc=-1;
     if(dotmap[x][y].type==3) return;
     dis=new int*[201];//表示方向
     for(int i=0;i<201;i++)
         dis[i]=new int[201];
-    for(int i=1;i<=20;i++)
-        for(int j=1;j<=20;j++)
+    for(int i=1;i<=200;i++)
+        for(int j=1;j<=200;j++)
             dis[i][j]=-1;
     queue<pair<int,int> > q;
     int find=0;//表示是否找到最近的货物
-    bool s[200][200];//表示是否遍历过
+    bool s[201][201];//表示是否遍历过
+    memset(s,0,sizeof(s));
     s[x][y]=1;
     int X[4]={1,-1,0,0},Y[4]={0,0,-1,1};
     for(int i=0;i<4;i++){
         if(dotmap[x+X[i]][y+Y[i]].type==1&&dotmap[x+X[i]][y+Y[i]].type==2) continue;
+        if(dotmap[x+X[i]][y+Y[i]].type==3){
+            this->direc=i;
+            return;
+        }
         dis[x+X[i]][y+Y[i]]=i;//四周的确定方向
+        s[x+X[i]][y+Y[i]]=1;
         q.push(make_pair(x+X[i],y+Y[i]));
     }
     while(!q.empty()&&!find){
@@ -63,6 +71,7 @@ void Robot::find_good(Dot dotmap[][201]) {
     delete(dis);
 }
 void Robot::find_berth(Berth *berth) {
+    direc=-1;
     if(!carry||(carry&&berth_id!=-1)) return;
     int minn=40001;
     string road;
@@ -101,7 +110,10 @@ void Robot::operate(Dot dotmap[][201], Berth* berth) {
     }
 }
 
-void Robot::move(){
+void Robot::move(Dot dotmap[][201]){
+    int X[4]={1,-1,0,0},Y[4]={0,0,-1,1};
+    if(dotmap[x+X[direc]][y+Y[direc]].type==1||dotmap[x+X[direc]][y+Y[direc]].type==2)
+        return;
     printf("move ");
     printf("%d ", this->id);
     printf("%d\n", direc);
