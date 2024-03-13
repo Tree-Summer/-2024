@@ -12,8 +12,7 @@ int main()
     {
         int id=m.input();
         //int id = Input();
-        m.deal();
-        m.output();
+        m.deal();//
         zhen=id;
     }
     return 0;

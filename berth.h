@@ -21,12 +21,6 @@ class Berth
     GoodList gl;
     //maxn:不可达，dis里面存储berth到各个点的最短距离，也是各个点到berth的最短距离
     Berth(){
-        dis=new int*[201];
-        for(int i=0;i<201;i++)
-            dis[i]=new int[201];
-        for(int i=1;i<=20;i++)
-            for(int j=1;j<=20;j++)
-                dis[i][j]=maxn;
         this -> boatid = -1;
    }
    ~Berth(){
