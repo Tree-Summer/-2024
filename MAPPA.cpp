@@ -1,4 +1,6 @@
 #include"MAPPA.h"
+#include"Boat.cpp"
+#include"Robot.cpp"
 #include<bits/stdc++.h>
 #include<queue>
 using namespace std;
@@ -122,13 +124,16 @@ void MAPPA::vanish(){//货物消失逻辑,采用循环的队列
 	} 
 }
 void MAPPA::deal(){//处理拿取货物
+	//调用船函数
 	//调用机器人函数
 	for(int i=0;i<robot_num;i++){
-		robot[i].find_path(d,robot[i].find_berth(berth));
-		robot[i].move();
+		robot[i].move(d,berth);
 	}
 	//调用船函数
-	for(int i=0;i<)
+	for(int i=0;i<boat_num;i++){
+		boat[i].go(zhen,boat_capacity,berth);
+		boat[i].statuschange(zhen,boat_capacity,berth);
+	}
 	//printf("MAPPA deal");
 }
 void MAPPA::output(){//输出

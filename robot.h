@@ -17,6 +17,8 @@ public:
     int state;//robot是否是正常状态
     int tar_x;
     int tar_y;
+    int berth_id;
+    Good* g=NULL;
     string path;
     Robot(){};
     Robot(int x, int y, int carry, int state, int id){      //初始化
@@ -25,62 +27,19 @@ public:
         this->y = y;
         this->carry = carry;
         this->state = state;
-        
+
     }
-    string find_berth(Dot** dotmap, Berth *berth);
-    void move(int dir) {                                    //输出移动
-        printf("move ");
-        printf("%d %d", id, dir);
-    }
+    void find_berth(Berth *berth);
+    void operate(Dot dotmap[][201], Berth* berth);
+    void move();
+    bool change_good();//后期实现，用来改变货物
+    void find_good(Dot dotmap[][201]);
 
-    void operate(Dot** dotmap, Berth* berth);
-
-    string find_good(Dot** dotmap, Berth *bowei);
-
-    string find_path(Dot dotmap[][201],  Berth *berth);
-
-    void move();                                    //输出移动
+    void move(Dot dotmap[][201],Berth *berth);                                    //输出移动
   //注释掉了，可以在MAPPA里面实现
   //或者调用MAPPA里面的一些别的文件实现
 
 };
-
-// class Robots
-// {
-// public:
-//     vector<Robot*> list;    //存储机器人列表
-
-//     void push(Robot* r){
-//         list.push_back(r);
-//     }
-
-//     void init(){
-//         if (list.empty()){    //第一次初始化
-//             for(int i = 0;i < 10; i++){
-//                 int carry, x, y, state;
-//                 scanf("%d%d%d%d", &carry, &x, &y, &state);
-//                 getchar();
-//                 Robot* robot = new Robot(x, y, carry, state, i);
-//                 list.push_back(robot);
-//             }
-//         }
-//         else{                //后续更新
-//             for(int i = 0;i < list.size(); i++){
-//                 Robot* robot = list[i];
-//                 int x,y,state,carry;
-//                 scanf("%d%d%d%d", &carry, &x, &y, &state);
-//                 getchar();
-//                 robot->x = x;
-//                 robot->y = y;
-//                 robot->carry = carry;
-//                 robot->state = state;
-//             }
-//         }
-
-//     }
-
-// };
-
 class Step
 {
 public:

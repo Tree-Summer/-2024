@@ -10,6 +10,7 @@ class MAPPA{
 		const int n = 200;
 		const int robot_num = 10;
 		const int berth_num = 10;
+		const int boat_num=5;
 		const int N = 210;
 		int zhen,money;
 		int boat_capacity;
