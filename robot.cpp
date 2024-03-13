@@ -30,7 +30,6 @@ void Robot::find_good(Dot dotmap[][201]) {
      rec[this->x][this->y] = 1;
      queue1.push(step);
      vector1.push_back(step);
-     int distance = 0;
      tar_x=-1;
      tar_y=-1;
      //寻找第一个货物
@@ -158,8 +157,8 @@ void Robot::operate(Dot dotmap[][201], Berth* berth) {
         else if(dotmap[this->x][this->y].type == 4 && this->carry == 1){
             printf("pull ");
             printf("%d\n", id);
-            berth[berth_id].value += g->val;
-            delete(g);
+            berth[berth_id].gl.push(g);
+            g=NULL;
             fflush(stdout);
             this->carry = 0;
             this->berth_id=-1;

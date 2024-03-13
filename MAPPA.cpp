@@ -61,6 +61,7 @@ void MAPPA::init(){//初始化
     		if(ch[i][j]=='B') d[i][j].type=4;
     	}
 	}
+	for(int i=0;i<5;i++) boat[i].id=i;
 	for(int i=0;i<berth_num;i++){
 		int id;
         scanf("%d", &id);
@@ -100,12 +101,11 @@ int MAPPA::input(){//读入交互
         scanf("%d%d%d%d", &robot[i].carry, &robot[i].x, &robot[i].y, &robot[i].state);
     }
     for(int i = 0; i < 5; i ++){
-        scanf("%d%d\n", &boat[i].status, &boat[i].pos);
+        scanf("%d%d\n", &boat[i].status, &boat[i].berth_id);
 		//
-        boat[i].boweiid = boat[i].pos;
-        berth[boat[i].boweiid].boatid = i;
+		if(boat[i].berth_id!=-1)
+        	berth[boat[i].berth_id].boatid = i;
 		//
-		if(zhen==1) berth[boat[i].pos].space += boat_capacity;
     }
     char okk[100];
     scanf("%s", okk);
@@ -131,8 +131,7 @@ void MAPPA::deal(){//处理拿取货物
 	}
 	//调用船函数
 	for(int i=0;i<boat_num;i++){
-		boat[i].go(zhen,boat_capacity,berth);
-		boat[i].statuschange(zhen,boat_capacity,berth);
+		boat[i].move(zhen,boat_capacity,berth);
 	}
 	//printf("MAPPA deal");
 }
