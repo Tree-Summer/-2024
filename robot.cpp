@@ -7,8 +7,8 @@ using namespace std;
 void Robot::move(Dot dotmap[][210],Berth *berth){
     
     if(carry){
-        fprintf(stderr,"%d %d\n",*zhen,id);
         find_berth(berth);
+        //fprintf(stderr,"zhen:%d id:%d\n",*zhen,id);
     }
     //有货物的话则想办法到berth那里
     else find_good(dotmap);
@@ -102,8 +102,9 @@ void Robot::find_good(Dot dotmap[][210]) {
 void Robot::find_berth(Berth *berth) {
     direc=-1;
     int minn=40001;
-    if(berth_id==-1){
-        for(int i=0;i<9;i++){
+    string road;
+    if(berth_id<0||berth_id>9){
+        for(int i=0;i<=9;i++){
             if(berth[i].dis[x][y]<minn)
                 berth_id=i,minn=berth[i].dis[x][y];
         }
@@ -122,29 +123,31 @@ void Robot::operate(Dot dotmap[][210], Berth* berth) {
     if(dotmap[this->x][this->y].type == 3 && this->carry == 0){
         printf("get ");
         printf("%d\n", this->id);
+        g=dotmap[x][y].good;
+        if(g!=NULL)
+            fprintf(stderr,"%d %d\n",g->time,g->val);
         dotmap[this->x][this->y].changetype(0);
-        this->carry = 1;
         tar_x=-1,tar_y=-1;
      }
     else if(dotmap[this->x][this->y].type == 4 && this->carry == 1){
         printf("pull ");
         printf("%d\n", this->id);
-        berth[berth_id].gl.push(g);
+        //if(g!=NULL)
+         //   berth[berth_id].gl.push(g);
         g=NULL;
-        this->carry = 0;
         this->berth_id=-1;
         tar_x=-1,tar_y=-1;
     }
 }
 
 void Robot::move(Dot dotmap[][210]){
-    int Y[4]={0,0,-1,1},X[4]={1,-1,0,0};
+    int Y[4]={1,-1,0,0},X[4]={0,0,-1,1};
     if(direc==-1) return;
     if(!able_to_move(dotmap,x+X[direc],y+Y[direc]))
         return;
     printf("move ");
     printf("%d ", this->id);
-    printf("%d\n", this->direc);
+    printf("%d\n", direc);
     //path.erase(path.begin());
 }
 

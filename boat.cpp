@@ -38,7 +38,7 @@ void Boat::load(Berth* berth,int boat_capacity,int nowtime){
         berth[berth_id].gl.pop();
     }
     num+=k;
-    if(num==boat_capacity||15000-nowtime<100){
+    if(num==boat_capacity||15000-nowtime<1000){
         berth[berth_id].boatid=-1;
         berth_id=-1;
         printf("go %d\n",id);
@@ -77,10 +77,11 @@ void Boat::statuschange(int nowtime,int boat_capacity,Berth *berth){
     }
 }*/
 void Boat::move(int nowtime,int boat_capacity,Berth* berth){
-    if(status==0) return;
+    if(status==0) return;//船现在不能移动
     if(status==2&&berth_id!=-1){
         printf("ship %d %d\n",id,berth_id);
-    }
-    if(berth_id==-1) ship(nowtime,boat_capacity,berth);
-    else load(berth,boat_capacity,nowtime);
+        return;
+    }//在外面等待
+    if(berth_id==-1) ship(nowtime,boat_capacity,berth);//驶出虚拟点
+    else load(berth,boat_capacity,nowtime);//装载
 }
