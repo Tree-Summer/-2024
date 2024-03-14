@@ -11,7 +11,7 @@ int main()
     m = new MAPPA;
     printf("a");
     m->init();
-    for(int zhen = 1; zhen <= 150000; zhen ++)
+    for(int zhen = 1; zhen <= 15000; zhen ++)
     {
         int id=m->input();
 //        int id = Input();//

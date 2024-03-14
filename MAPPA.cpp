@@ -63,7 +63,8 @@ void MAPPA::init(){//初始化
 	//printf("qwq");
 	char ch[210][210];
 	for(int i = 1; i <= 200; i ++)
-        scanf("%s", ch[i] + 1);
+        for(int j=1; j<=200; j++)
+            scanf("%s", &ch[i][j]);
     //0:land
 	//1:sea
 	//2:hurdle
@@ -181,21 +182,20 @@ void MAPPA::vanish(){//货物消失逻辑,采用循环的队列
 void MAPPA::deal(){//处理拿取货物
 	//调用船函数
 	//调用机器人函数
-//	vanish();
-////    file.open("C:\\Users\\93211\\Desktop\\wyl_git\\data.txt", ios::out|ios::app);
-//	for(int i=0;i<robot_num;i++){
-//		robot[i].move(d, berth);
-//        int X[4] = {1, -1, 0, 0};
-//        int Y[4] = {0, 0, -1, 1};
-//        for(int j = 0;j < 4; j++){
-//            file<<"id="<<robot[i].id<<' '<<robot[i].x+X[i]<<' '<<robot[i].y+Y[i]<<' '<<d[robot[i].x+X[i]][robot[i].y+Y[i]].type<<endl;
-//        }
-//	}
-//    file.close();
-	//调用船函数
-//	for(int i=0;i<boat_num;i++){
-//		boat[i].move(zhen,boat_capacity,berth);
-//	}
+	vanish();
+	for(int i=0;i<robot_num;i++){
+		robot[i].move(d, berth);
+        int X[4] = {1, -1, 0, 0};
+        int Y[4] = {0, 0, -1, 1};
+        for(int j = 0;j < 4; j++){
+            file<<"id="<<robot[i].id<<' '<<robot[i].x+X[i]<<' '<<robot[i].y+Y[i]<<' '<<d[robot[i].x+X[i]][robot[i].y+Y[i]].type<<endl;
+        }
+	}
+    file.close();
+	// 调用船函数
+	for(int i=0;i<boat_num;i++){
+		boat[i].move(zhen,boat_capacity,berth);
+	}
 	puts("OK");
     fflush(stdout);
 	//printf("MAPPA deal");

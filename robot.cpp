@@ -4,9 +4,10 @@
 #include<queue>
 using namespace std;
 
-void Robot::move(Dot dotmap[][210],Berth *berth){
+void Robot::move(Dot dotmap[][201],Berth *berth){
 
     if(carry) find_berth(berth);
+
     //有货物的话则想办法到berth那里
     else find_good(dotmap);
     //没有货物的话找货物
@@ -25,7 +26,7 @@ bool beside(Step* a, Step* b){ //判断相邻
 
 }
 
-bool Robot::able_to_move(Dot dotmap[][210],int x,int y ){
+bool Robot::able_to_move(Dot dotmap[][201],int x,int y ){
     if(x<=0||x>200) return 0;
     if(y<=0||y>200) return 0;
     if(dotmap[x][y].type==1) return 0;
@@ -33,7 +34,7 @@ bool Robot::able_to_move(Dot dotmap[][210],int x,int y ){
     return 1;
 }
 
-void Robot::find_good(Dot dotmap[][210]) {
+void Robot::find_good(Dot dotmap[][201]) {
     direc=-1;
     if(dotmap[x][y].type==3) return;
     for(int i=1;i<=200;i++)
@@ -117,7 +118,7 @@ void Robot::find_berth(Berth *berth) {
 }
 
 
-void Robot::operate(Dot dotmap[][210], Berth* berth) {
+void Robot::operate(Dot dotmap[][201], Berth* berth) {
     if(dotmap[this->x][this->y].type == 3 && this->carry == 0){
         printf("get ");
         printf("%d\n", this->id);
@@ -136,7 +137,7 @@ void Robot::operate(Dot dotmap[][210], Berth* berth) {
     }
 }
 
-void Robot::move(Dot dotmap[][210]){
+void Robot::move(Dot dotmap[][201]){
     int X[4]={1,-1,0,0},Y[4]={0,0,-1,1};
     if(direc==-1) return;
     if(!able_to_move(dotmap,x+X[direc],y+Y[direc]))
