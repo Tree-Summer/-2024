@@ -26,8 +26,8 @@ bool beside(Step* a, Step* b){ //判断相邻
 }
 
 bool Robot::able_to_move(Dot dotmap[][210],int x,int y ){
-    if(x==0||x>200) return 0;
-    if(y==0||y>200) return 0;
+    if(x<=0||x>200) return 0;
+    if(y<=0||y>200) return 0;
     if(dotmap[x][y].type==1) return 0;
     if(dotmap[x][y].type==2) return 0;
     return 1;

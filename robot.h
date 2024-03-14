@@ -25,6 +25,8 @@ public:
     Good* g=NULL;
     string path;
     Robot(){
+        carry=0;
+        state=1;
         dis=new int*[210];//表示方向
         for(int i=0;i<210;i++)
             dis[i]=new int[210];
