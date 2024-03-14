@@ -56,7 +56,6 @@ void Boat::statuschange(int nowtime,int boat_capacity,Berth *berth){
         berth[boweiid].space+=boat_capacity;
         status =0,pos =boweiid;
         //对于泊位选择的初步逻辑函数为一次比一次
-        /*
         float max = (float)berth[0].value/(float)berth[0].transport_time,id=-1;
 
         for(int i = 0;i < 10;i++){

@@ -6,7 +6,10 @@ using namespace std;
 
 void Robot::move(Dot dotmap[][210],Berth *berth){
     
-    if(carry) find_berth(berth);
+    if(carry){
+        fprintf(stderr,"%d %d\n",*zhen,id);
+        find_berth(berth);
+    }
     //有货物的话则想办法到berth那里
     else find_good(dotmap);
     //没有货物的话找货物
@@ -42,14 +45,14 @@ void Robot::find_good(Dot dotmap[][210]) {
     memset(s,0,sizeof(s));
     s[x][y]=1;
     int X[4]={0,0,-1,1},Y[4]={1,-1,0,0};
-    if(*zhen%1000==0){
-            fprintf(stderr,"out\nzhen:%d\n x:%d y:%d id:%d\n",*zhen,x,y,id);
-        }
+    // if(*zhen%1000==0){
+    //         fprintf(stderr,"out\nzhen:%d\n x:%d y:%d id:%d\n",*zhen,x,y,id);
+    //     }
     for(int i=0;i<4;i++){
         if(!able_to_move(dotmap,x+X[i],y+Y[i])) continue;
-        if(*zhen%1000==0){
-            fprintf(stderr,"dis:%d\n x:%d y:%d\n",i,x+X[i],y+Y[i]);
-        }
+        // if(*zhen%1000==0){
+        //     fprintf(stderr,"dis:%d\n x:%d y:%d\n",i,x+X[i],y+Y[i]);
+        // }
         if(dotmap[x+X[i]][y+Y[i]].type==3){
             this->direc=i;
             return;
@@ -62,9 +65,9 @@ void Robot::find_good(Dot dotmap[][210]) {
         int nowx=q.front().first;
         int nowy=q.front().second;
         q.pop();
-        if(*zhen%1000==0){
-            fprintf(stderr,"%d %d %d\n",nowx,nowy,dis[nowx][nowy]);
-        }
+        // if(*zhen%1000==0){
+        //     fprintf(stderr,"%d %d %d\n",nowx,nowy,dis[nowx][nowy]);
+        // }
         for(int i=0;i<4;i++){
             int nx=nowx+X[i];
             int ny=nowy+Y[i];//下一步的坐标
@@ -82,15 +85,15 @@ void Robot::find_good(Dot dotmap[][210]) {
                 find=1;
                 this->direc=dis[nowx][nowy];
             }//找到了方向
-            if(find==1&&*zhen%1000==0){
-                fprintf(stderr,"x:%d y:%d\n",x,y);
-                fprintf(stderr,"tar_x:%d tar_y:%d type:%d direc:%d\n",nx,ny,dotmap[tar_x][tar_y].type,direc);
-                for(int k=max((x-abs(tar_x-x)),1);k<=min(x+abs(tar_x-x),200);k++){
-                    for(int j=max(1,y-abs(y-tar_y));j<=min(200,y+abs(y-tar_y));j++)
-                        fprintf(stderr,"%d ",dotmap[k][j].type);
-                    fprintf(stderr,"\n");
-                }
-            }
+            // if(find==1&&*zhen%1000==0){
+            //     fprintf(stderr,"x:%d y:%d\n",x,y);
+            //     fprintf(stderr,"tar_x:%d tar_y:%d type:%d direc:%d\n",nx,ny,dotmap[tar_x][tar_y].type,direc);
+            //     for(int k=max((x-abs(tar_x-x)),1);k<=min(x+abs(tar_x-x),200);k++){
+            //         for(int j=max(1,y-abs(y-tar_y));j<=min(200,y+abs(y-tar_y));j++)
+            //             fprintf(stderr,"%d ",dotmap[k][j].type);
+            //         fprintf(stderr,"\n");
+            //     }
+            // }
             s[nx][ny]=1;
             q.push(make_pair(nx,ny));
         }
@@ -98,12 +101,12 @@ void Robot::find_good(Dot dotmap[][210]) {
 }
 void Robot::find_berth(Berth *berth) {
     direc=-1;
-    if(!carry||(carry&&berth_id!=-1)) return;
     int minn=40001;
-    string road;
-    for(int i=0;i<9;i++){
-        if(berth[i].dis[x][y]<minn)
-            berth_id=i,minn=berth[i].dis[x][y];
+    if(berth_id==-1){
+        for(int i=0;i<9;i++){
+            if(berth[i].dis[x][y]<minn)
+                berth_id=i,minn=berth[i].dis[x][y];
+        }
     }
     //0:右边，1：左边，2：上面，3：下面
     int X[4]={0,0,-1,1},Y[4]={1,-1,0,0};
@@ -135,13 +138,13 @@ void Robot::operate(Dot dotmap[][210], Berth* berth) {
 }
 
 void Robot::move(Dot dotmap[][210]){
-    int X[4]={1,-1,0,0},Y[4]={0,0,-1,1};
+    int Y[4]={0,0,-1,1},X[4]={1,-1,0,0};
     if(direc==-1) return;
     if(!able_to_move(dotmap,x+X[direc],y+Y[direc]))
         return;
     printf("move ");
     printf("%d ", this->id);
-    printf("%d\n", direc);
+    printf("%d\n", this->direc);
     //path.erase(path.begin());
 }
 
