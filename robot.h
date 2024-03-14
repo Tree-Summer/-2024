@@ -20,6 +20,7 @@ public:
     int berth_id;
     int direc;
     int **dis;
+    int *zhen;//调试用
     bool s[210][210];//表示是否遍历过
     bool able_to_move(Dot dotmap[][210],int x,int y );
     Good* g=NULL;
