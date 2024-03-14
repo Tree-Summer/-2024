@@ -4,6 +4,8 @@
 #include<bits/stdc++.h>
 #include<queue>
 using namespace std;
+
+
 void MAPPA::precount(int id){//预处理泊位距离
 	printf("%d \n",id);
 	queue<pair<int,int> > q;

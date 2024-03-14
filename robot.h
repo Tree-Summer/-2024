@@ -28,14 +28,14 @@ public:
     Robot(){
         carry=0;
         state=1;
-        dis=new int*[210];//表示方向
-        for(int i=0;i<210;i++)
-            dis[i]=new int[210];
+//        dis=new int*[210];//表示方向
+//        for(int i=0;i<210;i++)
+//            dis[i]=new int[210];
     };
     Robot(int x, int y, int carry, int state, int id){      //初始化
-        dis=new int*[210];//表示方向
-        for(int i=0;i<210;i++)
-            dis[i]=new int[210];
+//        dis=new int*[210];//表示方向
+//        for(int i=0;i<210;i++)
+//            dis[i]=new int[210];
         this->id = id;
         this->x = x;
         this->y = y;
