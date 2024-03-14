@@ -4,14 +4,15 @@
 #include<queue>
 using namespace std;
 void Robot::move(Dot dotmap[][201],Berth *berth){
-    
     if(carry) find_berth(berth);
     //有货物的话则想办法到berth那里
     else find_good(dotmap);
     //没有货物的话找货物
     if(this->direc!=-1)
         move(dotmap);
-    operate(dotmap,berth);
+    operate(dotmap, berth);
+
+
 }
 
 bool beside(Step* a, Step* b){ //判断相邻
@@ -23,83 +24,6 @@ bool beside(Step* a, Step* b){ //判断相邻
 }
 
 void Robot::find_good(Dot dotmap[][201]) {
-<<<<<<< HEAD
-     if(carry) return;
-     queue<Step*> queue1;
-     vector<Step*> vector1;
-     vector<Step*> vector2;
-     string road;
-     bool rec[200][200];  //记录足迹
-     memset(rec,0,sizeof(rec));
-     Step* step = new Step(this->x, this->y, 0);
-     rec[this->x][this->y] = true;
-     queue1.push(step);
-     vector1.push_back(step);
-     tar_x=-1;
-     tar_y=-1;
-     //寻找第一个货物
-     while(!queue1.empty()&&tar_x==-1){
-         Step* s = queue1.front();
-         queue1.pop();
-         int x_pos, y_pos;
-         int delta_x[4] = {1, 0, -1, 0};
-         int delta_y[4] = {0, 1, 0, -1};
-         for(int i = 0;i < 4; i++){
-             x_pos = s->x + delta_x[i];
-             y_pos = s->y + delta_y[i];
-             if(x_pos >= 0 && x_pos < 200 && y_pos >= 0 && y_pos < 200){
-                 if((dotmap[x_pos][y_pos].type == 0||dotmap[x_pos][y_pos].type == 4) && rec[x_pos][y_pos] == 0){//等于陆地
-                     Step* step = new Step(x_pos, y_pos, s->dist+1);
-                     queue1.push(step);
-                     vector1.push_back(step);
-                     rec[x_pos][y_pos] = true;
-                 }
-                 else if(dotmap[x_pos][y_pos].type == 3 && rec[x_pos][y_pos] == 0){
-                     Step* end_step = new Step(x_pos, y_pos, s->dist + 1);
-                     vector1.push_back(end_step);
-                     queue1.push(end_step);
-                     tar_x=x;
-                     tar_y=y;//确定目标货物
-                     break;
-                 }
-             }
-         }
-
-     }
-     Step* destination = vector1[vector1.size()-1];
-     int length = destination->dist;
-     for(int i = length;i >= 0; i--){
-         vector2.push_back(destination);
-         for(int j = 0;j < vector1.size(); j++){
-             if(vector1[j]->dist == destination->dist - 1 && beside(vector1[j], destination)){
-                 destination = vector1[j];
-                 break;
-             }
-         }
-     }
-     for (int i = vector2.size()-1;i >= 1; i--){
-         int x1 = vector2[i]->x;
-         int y1 = vector2[i]->y;
-         int x2 = vector2[i-1]->x;
-         int y2 = vector2[i-1]->y;
-
-         if((x2-x1) == 1 && (y2-y1) == 0){
-             road.push_back('0');
-         }
-         else if((x2-x1) == -1 && (y2-y1) == 0){
-             road.push_back('1');
-         }
-         else if((x2-x1) == 0 && (y2-y1) == 1){
-             road.push_back('3');
-         }
-         else if((x2-x1) == 0 && (y2-y1) == -1){
-             road.push_back('2');
-         }
-     }
-
-     this->path = road;
-
-=======
     direc=-1;
     if(dotmap[x][y].type==3) return;
     dis=new int*[201];//表示方向
@@ -146,7 +70,6 @@ void Robot::find_good(Dot dotmap[][201]) {
         }
     }
     delete(dis);
->>>>>>> 65acd288cb746668c89f36d6854ee9435d57a50d
 }
 void Robot::find_berth(Berth *berth) {
     direc=-1;
@@ -196,7 +119,7 @@ void Robot::move(Dot dotmap[][201]){
     printf("%d ", this->id);
     printf("%d\n", direc);
     fflush(stdout);
-    //path.erase(path.begin());
+//    path.erase(path.begin());
 }
 
 

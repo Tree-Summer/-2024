@@ -5,6 +5,9 @@
 #include "Dot.h"
 #include "robot.h"
 #include "GoodsManager.h"
+#include <fstream>
+#include <iostream>
+
 class MAPPA{
 	public:
 		const int n = 200;
@@ -14,6 +17,11 @@ class MAPPA{
 		const int N = 210;
 		int zhen,money;
 		int boat_capacity;
+
+        //
+        fstream file;
+        //
+
 		GoodsManager gm;
 		Dot d[201][201];
 		Berth berth[20];

@@ -16,5 +16,4 @@ int main()
         zhen=id;
     }
     return 0;
-
 }
