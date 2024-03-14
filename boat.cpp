@@ -62,7 +62,6 @@ void Boat::statuschange(int nowtime,int boat_capacity,Berth *berth){
         for(int i = 0;i < 10;i++){
             if( berth[i].space<0 && (float)berth[i].value/ (float)berth[i].transport_time>max){
                 id =i; max = (float)berth[i].value/ (float)berth[i].transport_time;
-            }
         }
         num = 0;
         time = nowtime+ berth[id].transport_time;

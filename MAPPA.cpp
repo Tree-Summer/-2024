@@ -137,9 +137,15 @@ int MAPPA::input(){//读入交互
         scanf("%d%d%d%d", &robot[i].carry, &robot[i].x, &robot[i].y, &robot[i].state);
 		robot[i].x+=1;
 		robot[i].y+=1;
-		if(robot[i].state==0){
-			fprintf(stderr,"%d %d %d\n",d[robot[i].x][robot[i].y].type,robot[i].x,robot[i].y);  
-		}
+		robot[i].zhen=&(this->zhen);
+		// if(robot[i].state==0){
+		// 	fprintf(stderr,"aaaaaa\n");  
+		// 	fprintf(stderr,"%d %d %d\n",d[robot[i].x][robot[i].y].type,robot[i].x,robot[i].y);  
+		// 	fprintf(stderr,"%d %d %d\n",d[robot[i].x+1][robot[i].y].type,robot[i].x,robot[i].y);  
+		// 	fprintf(stderr,"%d %d %d\n",d[robot[i].x-1][robot[i].y].type,robot[i].x,robot[i].y);  
+		// 	fprintf(stderr,"%d %d %d\n",d[robot[i].x][robot[i].y+1].type,robot[i].x,robot[i].y);  
+		// 	fprintf(stderr,"%d %d %d\n",d[robot[i].x][robot[i].y-1].type,robot[i].x,robot[i].y);  
+		// }调试用
 		//调整坐标适应地图
 	}
     for(int i = 0; i < 5; i ++){
@@ -156,6 +162,9 @@ int MAPPA::input(){//读入交互
     return zhen;
 }
 void MAPPA::vanish(){//货物消失逻辑,采用循环的队列
+	// if(zhen%100-15<=0){
+	// 	fprintf(stderr,"%d %d\n",gm.front,gm.end);
+	// }调试用，大概率正常
 	for(int i=gm.front;i!=gm.end;i++){
 		i=i%gm.size;
 		int x=gm.G[i].x,y=gm.G[i].y;
