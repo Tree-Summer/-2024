@@ -11,7 +11,7 @@ int main()
     for(int zhen = 1; zhen <= 15000; zhen ++)
     {
         int id=m.input();
-        //int id = Input();
+        //int id = Input();//
         m.deal();//
         zhen=id;
     }

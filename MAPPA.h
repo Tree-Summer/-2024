@@ -15,7 +15,7 @@ class MAPPA{
 		int zhen,money;
 		int boat_capacity;
 		GoodsManager gm;
-		Dot d[201][201];
+		Dot d[210][210];
 		Berth berth[20];
 		Boat boat[6];
 		Robot robot[11];

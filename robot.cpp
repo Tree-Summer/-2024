@@ -3,7 +3,8 @@
 #include<bits/stdc++.h>
 #include<queue>
 using namespace std;
-void Robot::move(Dot dotmap[][201],Berth *berth){
+
+void Robot::move(Dot dotmap[][210],Berth *berth){
     
     if(carry) find_berth(berth);
     //有货物的话则想办法到berth那里
@@ -22,18 +23,14 @@ bool beside(Step* a, Step* b){ //判断相邻
 
 }
 
-void Robot::find_good(Dot dotmap[][201]) {
+void Robot::find_good(Dot dotmap[][210]) {
     direc=-1;
     if(dotmap[x][y].type==3) return;
-    dis=new int*[201];//表示方向
-    for(int i=0;i<201;i++)
-        dis[i]=new int[201];
     for(int i=1;i<=200;i++)
         for(int j=1;j<=200;j++)
             dis[i][j]=-1;
     queue<pair<int,int> > q;
     int find=0;//表示是否找到最近的货物
-    bool s[201][201];//表示是否遍历过
     memset(s,0,sizeof(s));
     s[x][y]=1;
     int X[4]={1,-1,0,0},Y[4]={0,0,-1,1};
@@ -68,7 +65,6 @@ void Robot::find_good(Dot dotmap[][201]) {
             q.push(make_pair(nx,ny));
         }
     }
-    delete(dis);
 }
 void Robot::find_berth(Berth *berth) {
     direc=-1;
@@ -89,11 +85,10 @@ void Robot::find_berth(Berth *berth) {
 }
 
 
-void Robot::operate(Dot dotmap[][201], Berth* berth) {
+void Robot::operate(Dot dotmap[][210], Berth* berth) {
     if(dotmap[this->x][this->y].type == 3 && this->carry == 0){
         printf("get ");
         printf("%d\n", this->id);
-        fflush(stdout);
         dotmap[this->x][this->y].changetype(0);
         this->carry = 1;
         tar_x=-1,tar_y=-1;
@@ -103,21 +98,19 @@ void Robot::operate(Dot dotmap[][201], Berth* berth) {
         printf("%d\n", this->id);
         berth[berth_id].gl.push(g);
         g=NULL;
-        fflush(stdout);
         this->carry = 0;
         this->berth_id=-1;
         tar_x=-1,tar_y=-1;
     }
 }
 
-void Robot::move(Dot dotmap[][201]){
+void Robot::move(Dot dotmap[][210]){
     int X[4]={1,-1,0,0},Y[4]={0,0,-1,1};
     if(dotmap[x+X[direc]][y+Y[direc]].type==1||dotmap[x+X[direc]][y+Y[direc]].type==2)
         return;
     printf("move ");
     printf("%d ", this->id);
     printf("%d\n", direc);
-    fflush(stdout);
     //path.erase(path.begin());
 }
 

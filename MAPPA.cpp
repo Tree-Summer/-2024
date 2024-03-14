@@ -9,9 +9,9 @@ void MAPPA::precount(int id){//预处理泊位距离
 	queue<pair<int,int> > q;
 	bool s[210][210];
 	memset(s,0,sizeof(s));//全部赋值为0
-	berth[id].dis=new int*[201];
-    for(int i=0;i<201;i++)
-        berth[id].dis[i]=new int[201];
+	berth[id].dis=new int*[210];
+    for(int i=0;i<210;i++)
+        berth[id].dis[i]=new int[210];
 	for(int i=1;i<=200;i++)
             for(int j=1;j<=200;j++)
                 berth[id].dis[i][j]=40001;
@@ -41,13 +41,13 @@ void MAPPA::precount(int id){//预处理泊位距离
 		}
 	}
 	
-	printf("%d %d\n",berth[id].x,berth[id].y);
-	for(int i=1;i<=200;i++){
-		for(int j=1;j<=200;j++){
-			printf("%d ",berth[id].dis[i][j]);
-		}
-		printf("\n");
-	}
+	// printf("%d %d\n",berth[id].x,berth[id].y);
+	// for(int i=1;i<=200;i++){
+	// 	for(int j=1;j<=200;j++){
+	// 		printf("%d ",berth[id].dis[i][j]);
+	// 	}
+	// 	printf("\n");
+	// }
 	//printf("finished");
 }
 void MAPPA::predeal(){//预处理
@@ -83,6 +83,7 @@ void MAPPA::init(){//初始化
 	// 	}
 	// 	printf("\n");
 	// }
+//	robot[0].outdot(d);
 	for(int i=0;i<5;i++) boat[i].id=i;
 	for(int i=0;i<10;i++) robot[i].id=i;
 	for(int i=0;i<berth_num;i++){
@@ -136,6 +137,13 @@ int MAPPA::input(){//读入交互
         scanf("%d%d%d%d", &robot[i].carry, &robot[i].x, &robot[i].y, &robot[i].state);
 		robot[i].x+=1;
 		robot[i].y+=1;
+		if(1){
+			string file_name = "E://xuleyi//大二下//华为挑战赛//WindowsReleasev1.1//Demo//data.txt";
+			ofstream file_writer(file_name, ios_base::out);
+			file_writer<<zhen<<endl;
+			file_writer<<d[robot[i].x][robot[i].y].type<<" "<<robot[i].x<<" "<<robot[i].y<<endl;
+			file_writer.close();
+		}
 		//调整坐标适应地图
 	}
     for(int i = 0; i < 5; i ++){

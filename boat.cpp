@@ -4,12 +4,12 @@
 
 void Boat::ship(int nowtime,int boat_capacity,Berth *berth){
 
-    float max = 0;
+    int max = -1;
     int maxid=-1;
     if(berth[berth_id].gl.total_val==0){
         for(int i = 0;i < 10;i++){
-            if( (float)berth[i].gl.total_val>max&&berth[i].boatid==-1){
-                maxid =i; max = (float)berth[i].gl.total_val;
+            if( berth[i].gl.total_val>max&&berth[i].boatid==-1){
+                maxid =i; max = berth[i].gl.total_val;
             }
         }
     }
@@ -20,8 +20,7 @@ void Boat::ship(int nowtime,int boat_capacity,Berth *berth){
     time = nowtime+ 500;
     status =0;
     time = nowtime + 1000;
-    printf("ship %d %d",id,berth_id);
-    fflush(stdout);
+    printf("ship %d %d\n",id,berth_id);
 }
 
 // go to virtual point
@@ -43,7 +42,6 @@ void Boat::load(Berth* berth,int boat_capacity,int nowtime){
         berth[berth_id].boatid=-1;
         berth_id=-1;
         printf("go %d\n",id);
-        fflush(stdout);
     }
 }
 /*
@@ -84,7 +82,6 @@ void Boat::move(int nowtime,int boat_capacity,Berth* berth){
     if(status==0) return;
     if(status==2&&berth_id!=-1){
         printf("ship %d %d\n",id,berth_id);
-        fflush(stdout);
     }
     if(berth_id==-1) ship(nowtime,boat_capacity,berth);
     else load(berth,boat_capacity,nowtime);
