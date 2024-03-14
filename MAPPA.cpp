@@ -137,12 +137,8 @@ int MAPPA::input(){//读入交互
         scanf("%d%d%d%d", &robot[i].carry, &robot[i].x, &robot[i].y, &robot[i].state);
 		robot[i].x+=1;
 		robot[i].y+=1;
-		if(1){
-			string file_name = "E://xuleyi//大二下//华为挑战赛//WindowsReleasev1.1//Demo//data.txt";
-			ofstream file_writer(file_name, ios_base::out);
-			file_writer<<zhen<<endl;
-			file_writer<<d[robot[i].x][robot[i].y].type<<" "<<robot[i].x<<" "<<robot[i].y<<endl;
-			file_writer.close();
+		if(robot[i].state==0){
+			fprintf(stderr,"%d %d %d\n",d[robot[i].x][robot[i].y].type,robot[i].x,robot[i].y);  
 		}
 		//调整坐标适应地图
 	}

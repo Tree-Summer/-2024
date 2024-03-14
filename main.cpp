@@ -5,6 +5,7 @@ using namespace std;
 
 int main()
 {
+    FILE *stream=freopen("freopen.out","w",stderr);
     MAPPA m;
     //printf("a");
     m.init();

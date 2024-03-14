@@ -23,6 +23,14 @@ bool beside(Step* a, Step* b){ //判断相邻
 
 }
 
+bool Robot::able_to_move(Dot dotmap[][210],int x,int y ){
+    if(x==0||x>200) return 0;
+    if(y==0||y>200) return 0;
+    if(dotmap[x][y].type==1) return 0;
+    if(dotmap[x][y].type==2) return 0;
+    return 1;
+}
+
 void Robot::find_good(Dot dotmap[][210]) {
     direc=-1;
     if(dotmap[x][y].type==3) return;
@@ -35,7 +43,7 @@ void Robot::find_good(Dot dotmap[][210]) {
     s[x][y]=1;
     int X[4]={1,-1,0,0},Y[4]={0,0,-1,1};
     for(int i=0;i<4;i++){
-        if(dotmap[x+X[i]][y+Y[i]].type==1&&dotmap[x+X[i]][y+Y[i]].type==2) continue;
+        if(!able_to_move(dotmap,x+X[i],y+Y[i])) continue;
         if(dotmap[x+X[i]][y+Y[i]].type==3){
             this->direc=i;
             return;
@@ -55,11 +63,17 @@ void Robot::find_good(Dot dotmap[][210]) {
             if(s[nx][ny]) continue;//到过说明入队了也返回
             if(dotmap[nx][ny].type==1||dotmap[nx][ny].type==2) continue;//不能走也返回
             dis[nx][ny]=dis[nowx][nowy];//新扩展的是原方向走的
+            if(nx==tar_x&&y==tar_y){
+                find=1;
+                this->direc=dis[nowx][nowy];
+                return;
+            }
             if(dotmap[nx][ny].type==3){
                 tar_x=nx;
                 tar_y=ny;
                 find=1;
                 this->direc=dis[nowx][nowy];
+                return;
             }//找到了方向
             s[nx][ny]=1;
             q.push(make_pair(nx,ny));
@@ -106,7 +120,8 @@ void Robot::operate(Dot dotmap[][210], Berth* berth) {
 
 void Robot::move(Dot dotmap[][210]){
     int X[4]={1,-1,0,0},Y[4]={0,0,-1,1};
-    if(dotmap[x+X[direc]][y+Y[direc]].type==1||dotmap[x+X[direc]][y+Y[direc]].type==2)
+    if(direc==-1) return;
+    if(!able_to_move(dotmap,x+X[direc],y+Y[direc]))
         return;
     printf("move ");
     printf("%d ", this->id);
