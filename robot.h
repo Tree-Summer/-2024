@@ -21,7 +21,7 @@ public:
     int **dis;
     int *zhen;//调试用
     bool s[210][210];//表示是否遍历过
-    bool able_to_move(int x,int y );
+    bool able_to_move(Dot dotmap[][210], int x,int y );
     Good* g=NULL;
     string path;
     Robot(){
@@ -43,12 +43,12 @@ public:
 
     }
     void find_berth(Berth *berth);
-    void operate(Berth* berth);
-    void move(Dot dotmap[][201]);
-    bool change_good();//后期实现，用来改变货物
-    void find_good();
+    void operate(Dot dotmap[][210], Berth* berth);
+    void move(Dot dotmap[][210]);
+    bool change_good(Dot dotmap[][210]);//后期实现，用来改变货物
+    void find_good(Dot dotmap[][210]);
 
-    void move(Dot dotmap[][201], Berth *berth);                                    //输出移动
+    void move(Dot dotmap[][210], Berth *berth);                                    //输出移动
     void outdot(){
         for(int i=1;i<=200;i++){
             for(int j=1;j<=200;j++)
@@ -56,7 +56,8 @@ public:
         }
     }
     //调试用函数
-    void move(Dot[201];
+    void move(Dot[201]);
+
 };
 class Step
 {
