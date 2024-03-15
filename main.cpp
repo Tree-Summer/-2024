@@ -9,7 +9,6 @@ int main()
     FILE *stream=freopen("freopen.out","w",stderr);
     MAPPA *m;
     m = new MAPPA;
-    printf("a");
     m->init();
     for(int zhen = 1; zhen <= 15000; zhen ++)
     {
@@ -18,6 +17,7 @@ int main()
         m->deal();//
         zhen=id;
         printf("%d", zhen);
+        fflush(stdout);
     }
     return 0;
 }
