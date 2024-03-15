@@ -1,6 +1,5 @@
 #ifndef GoodsManager_H_H
 #define GoodsManager_H_H
-#pragma once
 #include "Good.h"
 class GoodsManager{
 	public:

@@ -1,6 +1,5 @@
 #ifndef Berth_H_H
 #define Berth_H_H
-#pragma once
 
 #include <iostream>
 using namespace std;

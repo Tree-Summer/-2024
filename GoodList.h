@@ -1,35 +1,35 @@
 #ifndef GoodList_H_H
 #define GoodList_H_H
-#pragma once
 #include"Good.h"
 struct GoodListNode{
     Good* g;
     GoodListNode *next;
 };
 struct GoodList{
-    GoodListNode *front,*end;
+    GoodListNode *front;
     int size=0;
     int total_val;
     GoodList(){
         front=new GoodListNode;
-        end=front;
+        front->next=NULL;
     }
     void push(Good *new_good){//放入
+        if(new_good==NULL) return;
         GoodListNode *gln=new GoodListNode;
         size++;
         total_val+=new_good->val;
         gln->g=new_good;
-        end->next=gln;
-        end=gln;
+        gln->next=front->next;
+        front->next=gln;
     }
-    Good* pop(){//弹出
-        if(size==0) return nullptr;
+    void pop(){//弹出
+        if(size==0) return;
         front->next=(front->next)->next;
         Good* good=(front->next)->g;
         total_val-=good->val;
         delete(front->next);
         size--;
-        return good;
+        return;
     }
 };
 #endif

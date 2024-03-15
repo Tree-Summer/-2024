@@ -1,7 +1,7 @@
 #include"MAPPA.h"
 #include"Boat.cpp"
 #include"Robot.cpp"
-#include<bits/stdc++.h>
+#include<string.h>
 #include<queue>
 using namespace std;
 

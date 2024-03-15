@@ -1,7 +1,6 @@
 //对于地图与泊位的交互
 #ifndef MAPPA_H_H
 #define MAPPA_H_H
-#pragma once
 #include "Dot.h"
 #include "robot.h"
 #include "GoodsManager.h"
