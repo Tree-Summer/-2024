@@ -87,7 +87,10 @@ void MAPPA::init(){//初始化
 	// }
 //	robot[0].outdot(d);
 	for(int i=0;i<5;i++) boat[i].id=i;
-	for(int i=0;i<10;i++) robot[i].id=i;
+	for(int i=0;i<10;i++){
+		robot[i].id=i;
+		robot[i].dotmap=d;
+	}
 	for(int i=0;i<berth_num;i++){
 		int id;
         scanf("%d", &id);
@@ -183,12 +186,7 @@ void MAPPA::deal(){//处理拿取货物
 	//调用机器人函数
 	vanish();
 	for(int i=0;i<robot_num;i++){
-		robot[i].move(d, berth);
-        int X[4] = {1, -1, 0, 0};
-        int Y[4] = {0, 0, -1, 1};
-//        for(int j = 0;j < 4; j++){
-//            file<<"id="<<robot[i].id<<' '<<robot[i].x+X[i]<<' '<<robot[i].y+Y[i]<<' '<<d[robot[i].x+X[i]][robot[i].y+Y[i]].type<<endl;
-//        }
+		robot[i].move(berth);
 	}
     file.close();
 	// 调用船函数

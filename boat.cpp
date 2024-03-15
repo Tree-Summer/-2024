@@ -1,4 +1,4 @@
-#include"boat.h"
+#include"Boat.h"
 // change the berth
 
 void Boat::ship(int nowtime,int boat_capacity,Berth *berth){
@@ -37,7 +37,7 @@ void Boat::load(Berth* berth,int boat_capacity,int nowtime){
         berth[berth_id].gl.pop();
     }
     num+=k;
-    if(num==boat_capacity||15000-nowtime<1000){
+    if(num==boat_capacity||15000-nowtime<=1000){
         berth[berth_id].boatid=-1;
         berth_id=-1;
         printf("go %d\n",id);

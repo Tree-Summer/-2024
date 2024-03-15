@@ -6,7 +6,7 @@ using namespace std;
 
 int main()
 {
-    FILE *stream=freopen("freopen.out","w",stderr);
+    //FILE *stream=freopen("freopen.out","w",stderr);
     MAPPA* m=new MAPPA;
     //printf("a");
     m->init();

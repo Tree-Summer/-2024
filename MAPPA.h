@@ -2,7 +2,7 @@
 #ifndef MAPPA_H_H
 #define MAPPA_H_H
 #include "Dot.h"
-#include "robot.h"
+#include "Robot.h"
 #include "GoodsManager.h"
 #include <fstream>
 #include <iostream>
@@ -22,7 +22,7 @@ class MAPPA{
         //
 
 		GoodsManager gm;
-		Dot d[201][201];
+		Dot **d;
 		Berth berth[20];
 		Boat boat[6];
 		Robot robot[10];
@@ -34,6 +34,9 @@ class MAPPA{
 		void deal();
 		void precount(int id);//预处理泊位到各个点最短距离
 		MAPPA(){
+			d=new Dot*[210];//表示方向
+        	for(int i=0;i<210;i++)
+            	d[i]=new Dot[210];
 			//printf("MAPPA INIT");
 		};
 }; 

@@ -1,7 +1,7 @@
 #ifndef boat_H_H
 #define boat_H_H
 #include <iostream>
-#include "berth.h"
+#include "Berth.h"
 
 class Boat
 {
