@@ -22,10 +22,10 @@ class MAPPA{
         //
 
 		GoodsManager gm;
-		Dot **d;
 		Berth berth[20];
 		Boat boat[6];
 		Robot robot[10];
+        Dot d[201][201];
 		void predeal();
 		void init();
 		int input();

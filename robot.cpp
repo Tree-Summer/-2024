@@ -5,7 +5,7 @@
 using namespace std;
 
 
-void Robot::move(Berth *berth){
+void Robot::move(Dot dotmap[][201], Berth *berth){
     
     if(carry){
         find_berth(berth);
@@ -143,7 +143,7 @@ void Robot::operate(Berth* berth) {
     }
 }
 
-void Robot::move(){
+void Robot::move(Dot dotmap[][201]){
     int Y[4]={1,-1,0,0},X[4]={0,0,-1,1};
     if(direc==-1) return;
     if(!able_to_move(x+X[direc],y+Y[direc]))
@@ -153,6 +153,7 @@ void Robot::move(){
     printf("%d\n", direc);
     //path.erase(path.begin());
 }
+
 
 
 
