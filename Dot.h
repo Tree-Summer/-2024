@@ -2,9 +2,9 @@
 #define Dot_H_H
 #pragma once
 
-#include "boat.h"
+#include "Boat.h"
 #include "Good.h"
-#include "berth.h"
+#include "Berth.h"
 class Dot{
 	public:
 		int type;
@@ -20,6 +20,7 @@ class Dot{
 		//5:ship
 		Dot(){
 			//printf("Dot init\n");
+			type=0;
 		}
 		void changetype(int type){
 			if(this->type==3&&good!=NULL) delete(good);

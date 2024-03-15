@@ -1,21 +1,21 @@
-#include "robot.h"
+#include "Robot.h"
 #include "Dot.h"
 #include<queue>
 #include<string.h>
 using namespace std;
 
-void Robot::move(Dot dotmap[][210],Berth *berth){
+void Robot::move(Berth *berth){
     
     if(carry){
         find_berth(berth);
         //fprintf(stderr,"zhen:%d id:%d\n",*zhen,id);
     }
     //有货物的话则想办法到berth那里
-    else find_good(dotmap);
+    else find_good();
     //没有货物的话找货物
     if(this->direc!=-1)
-        move(dotmap);
-    operate(dotmap,berth);
+        move();
+    operate(berth);
 }
 
 bool beside(Step* a, Step* b){ //判断相邻
@@ -26,7 +26,7 @@ bool beside(Step* a, Step* b){ //判断相邻
 
 }
 
-bool Robot::able_to_move(Dot dotmap[][210],int x,int y ){
+bool Robot::able_to_move(int x,int y ){
     if(x==0||x>200) return 0;
     if(y==0||y>200) return 0;
     if(dotmap[x][y].type==1) return 0;
@@ -34,7 +34,7 @@ bool Robot::able_to_move(Dot dotmap[][210],int x,int y ){
     return 1;
 }
 
-void Robot::find_good(Dot dotmap[][210]) {
+void Robot::find_good() {
     direc=-1;
     if(dotmap[x][y].type==3) return;
     for(int i=1;i<=200;i++)
@@ -49,7 +49,7 @@ void Robot::find_good(Dot dotmap[][210]) {
     //         fprintf(stderr,"out\nzhen:%d\n x:%d y:%d id:%d\n",*zhen,x,y,id);
     //     }
     for(int i=0;i<4;i++){
-        if(!able_to_move(dotmap,x+X[i],y+Y[i])) continue;
+        if(!able_to_move(x+X[i],y+Y[i])) continue;
         // if(*zhen%1000==0){
         //     fprintf(stderr,"dis:%d\n x:%d y:%d\n",i,x+X[i],y+Y[i]);
         // }
@@ -119,13 +119,13 @@ void Robot::find_berth(Berth *berth) {
 }
 
 
-void Robot::operate(Dot dotmap[][210], Berth* berth) {
+void Robot::operate(Berth* berth) {
     if(dotmap[this->x][this->y].type == 3 && this->carry == 0){
         printf("get ");
         printf("%d\n", this->id);
         g=dotmap[x][y].good;
-        if(g!=NULL)
-            fprintf(stderr,"%d %d\n",g->time,g->val);
+        // if(g!=NULL)
+        //     fprintf(stderr,"%d %d\n",g->time,g->val);
         dotmap[this->x][this->y].changetype(0);
         tar_x=-1,tar_y=-1;
      }
@@ -140,10 +140,10 @@ void Robot::operate(Dot dotmap[][210], Berth* berth) {
     }
 }
 
-void Robot::move(Dot dotmap[][210]){
+void Robot::move(){
     int Y[4]={1,-1,0,0},X[4]={0,0,-1,1};
     if(direc==-1) return;
-    if(!able_to_move(dotmap,x+X[direc],y+Y[direc]))
+    if(!able_to_move(x+X[direc],y+Y[direc]))
         return;
     printf("move ");
     printf("%d ", this->id);

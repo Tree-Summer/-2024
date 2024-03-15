@@ -85,7 +85,10 @@ void MAPPA::init(){//初始化
 	// }
 //	robot[0].outdot(d);
 	for(int i=0;i<5;i++) boat[i].id=i;
-	for(int i=0;i<10;i++) robot[i].id=i;
+	for(int i=0;i<10;i++){
+		robot[i].id=i;
+		robot[i].dotmap=d;
+	}
 	for(int i=0;i<berth_num;i++){
 		int id;
         scanf("%d", &id);
@@ -181,7 +184,7 @@ void MAPPA::deal(){//处理拿取货物
 	//调用机器人函数
 	vanish();
 	for(int i=0;i<robot_num;i++){
-		robot[i].move(d,berth);
+		robot[i].move(berth);
 	}
 	//调用船函数
 	for(int i=0;i<boat_num;i++){

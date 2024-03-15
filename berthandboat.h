@@ -1,5 +1,5 @@
-#include"berth.h"
-#include"boat.h"
+#include"Berth.h"
+#include"Boat.h"
 
 void renew(Boat *boat,Berth *berth){
     //船只在泊位等待的状态转移
