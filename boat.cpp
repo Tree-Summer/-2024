@@ -1,4 +1,3 @@
-#pragma once
 #include"boat.h"
 // change the berth
 

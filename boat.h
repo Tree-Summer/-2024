@@ -1,6 +1,5 @@
 #ifndef boat_H_H
 #define boat_H_H
-#pragma once
 #include <iostream>
 #include "berth.h"
 

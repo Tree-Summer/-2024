@@ -1,7 +1,7 @@
 #include "robot.h"
 #include "Dot.h"
-#include<bits/stdc++.h>
 #include<queue>
+#include<string.h>
 using namespace std;
 
 void Robot::move(Dot dotmap[][210],Berth *berth){

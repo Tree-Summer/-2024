@@ -1,6 +1,5 @@
 #ifndef robot_H_H
 #define robot_H_H
-#pragma once
 #include <iostream>
 #include <vector>
 #include <string>

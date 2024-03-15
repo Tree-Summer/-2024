@@ -1,6 +1,5 @@
 #ifndef GoodList_H_H
 #define GoodList_H_H
-#pragma once
 #include"Good.h"
 struct GoodListNode{
     Good* g;
