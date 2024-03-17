@@ -2,9 +2,10 @@
 #define Dot_H_H
 #pragma once
 
-#include "Boat.h"
+#include "boat.h"
 #include "Good.h"
-#include "Berth.h"
+#include "berth.h"
+
 class Dot{
 	public:
 		int type;
@@ -23,9 +24,9 @@ class Dot{
 			type=0;
 		}
 		void changetype(int type){
-			if(this->type==3&&good!=NULL) delete(good);
-			if(this->type==4&&berth!=NULL) delete(berth);
-			if(this->type==5&&boat!=NULL) delete(boat);
+//			if(this->type==3&&good!=NULL) delete(good);
+//			if(this->type==4&&berth!=NULL) delete(berth);
+//			if(this->type==5&&boat!=NULL) delete(boat);
 			this->type=type;
 		}
 };

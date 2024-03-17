@@ -1,6 +1,7 @@
 #ifndef GoodList_H_H
 #define GoodList_H_H
 #include"Good.h"
+
 struct GoodListNode{
     Good* g;
     GoodListNode *next;
