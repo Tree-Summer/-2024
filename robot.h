@@ -50,7 +50,7 @@ public:
     void move(Dot dotmap[][210]);
     bool change_good(Dot dotmap[][210]);//后期实现，用来改变货物
     void find_good(Dot dotmap[][210]);
-
+    void change_dir(Dot dotmap[][210], Berth* berth);
     void move(Dot dotmap[][210], Berth *berth);                                    //输出移动
     //调试用函数
 
@@ -68,9 +68,7 @@ public:
 };
 #endif
 
-
-void Robot::move(Dot dotmap[][210], Berth *berth){
-
+void Robot::change_dir(Dot (*dotmap)[210], Berth *berth) {
     if(carry){
         find_berth(berth);
         //fprintf(stderr,"zhen:%d id:%d\n",*zhen,id);
@@ -78,6 +76,9 @@ void Robot::move(Dot dotmap[][210], Berth *berth){
         //有货物的话则想办法到berth那里
     else find_good(dotmap);
     //没有货物的话找货物
+}
+
+void Robot::move(Dot dotmap[][210], Berth *berth){
     if(this->direc!=-1)
         move(dotmap);
     operate(dotmap, berth);
@@ -157,6 +158,7 @@ void Robot::find_good(Dot dotmap[][210]) {
     }
 }
 
+
 void Robot::find_berth(Berth *berth) {
     direc=-1;
     int minn=40001;
@@ -212,7 +214,11 @@ void Robot::move(Dot dotmap[][210]){
     if(direc==-1) return;
     if(!able_to_move(dotmap, x+X[direc],y+Y[direc]))
         return;
-    printf("move %d %d\n",this->id,direc);
-    fflush(stdout);
+    printf("move ");
+    printf("%d ", this->id);
+    printf("%d\n", direc);
+    //移动位置
+    this->x = x+X[direc];
+    this->y = y+Y[direc];
     //path.erase(path.begin());
 }

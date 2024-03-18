@@ -147,6 +147,7 @@ void MAPPA::init(){//初始化
         //berth[id].boatid=-1;
     }
     scanf("%d", &boat_capacity);
+    getchar();
 //	printf("predeal\n");
     predeal();
     char okk[100];
@@ -172,7 +173,6 @@ int MAPPA::input(){//读入交互
         gm.G[gm.end].time=zhen;
         gm.G[gm.end].val=val;
         d[x][y].type=3;
-        //printf("%d %d\n",x,y);
         d[x][y].good=gm.G+gm.end;//货物对应的点指向货物
     }
     for(int i = 0; i < robot_num; i ++)
@@ -189,6 +189,7 @@ int MAPPA::input(){//读入交互
         if(boat[i].berth_id!=-1)
             berth[boat[i].berth_id].boatid = i;
     }
+    getchar();
     char okk[100];
     scanf("%s", okk);
     return zhen;
@@ -212,15 +213,45 @@ void MAPPA::deal(){//处理拿取货物
     //调用船函数
     //调用机器人函数
     vanish();
+    int Y[4]={1,-1,0,0},X[4]={0,0,-1,1};
     for(int i=0;i<robot_num;i++){
-        robot[i].move(d, berth);
+        int flag=1;
+        robot[i].change_dir(d, berth);
+        if(robot[i].direc!=-1 && robot[i].state==1) {
+            int x_next = robot[i].x + X[robot[i].direc];
+            int y_next = robot[i].y + Y[robot[i].direc];
+            for (int j = 0; j < robot_num; j++) {
+                if (robot[j].x == x_next && robot[j].y==y_next) {flag=0;break;}
+            }
+        }
+        if(robot[i].direc!=-1 && flag==1 && robot[i].state==1)
+            robot[i].move(d, berth);
+        else if(robot[i].direc!=-1 && flag==0 && robot[i].state==1) {
+            for (int dir = 0; dir < 4; dir++) {
+                int x_next = robot[i].x + X[dir];
+                int y_next = robot[i].y + Y[dir];
+                int sign = 1;
+                for (int j = 0; j < robot_num; j++) {
+                    if (robot[j].x == x_next && robot[j].y == y_next) {
+                        sign = 0;
+                        break;
+                    }
+                }
+                if (sign == 1) {
+                    robot[i].direc = dir;
+                    robot[i].move(d, berth);
+                    break;
+                }
+            }
+        }
+        fprintf(stderr, "time:%d id:%d x:%d y:%d state:%d direc:%d\n", zhen, robot[i].id, robot[i].x, robot[i].y, robot[i].state, robot[i].direc);
     }
-    file.close();
+    //file.close();
     // 调用船函数
     for(int i=0;i<boat_num;i++){
         boat[i].move(zhen,boat_capacity,berth);
     }
-    puts("OK");
+    puts("OK\n");
     fflush(stdout);
     //printf("MAPPA deal");
 }

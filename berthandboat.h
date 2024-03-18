@@ -11,3 +11,4 @@ void renew(Boat *boat,Berth *berth){
         }
     }
 }
+

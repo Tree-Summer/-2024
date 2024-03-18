@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<<<<<<< HEAD
+<module classpath="CIDR" type="CPP_MODULE" version="4" />
+=======
+<module classpath="CMake" type="CPP_MODULE" version="4" />
+>>>>>>> 901b00274105e2c9af07e15e0a2b622721dfcd46
