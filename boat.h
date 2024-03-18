@@ -80,41 +80,7 @@ void Boat::load(Berth* berth,int boat_capacity,int nowtime){
         printf("go %d\n",id);
     }
 }
-/*
-//if the boat succeed to reach the goal
-void Boat::statuschange(int nowtime,int boat_capacity,Berth *berth){
-    //if(time==nowtime) status = 1;
-
-    //from virtual point back to berth(stable)
-    if(berth_id==-1&&status==1){
-        num = 0;
-        time = nowtime+ berth[berth_id].transport_time;
-        berth[boweiid].space+=boat_capacity;
-        status =0,pos =boweiid;
-        //对于泊位选择的初步逻辑函数为一次比一次
-        float max = (float)berth[0].value/(float)berth[0].transport_time,id=-1;
-
-        for(int i = 0;i < 10;i++){
-            if( berth[i].space<0 && (float)berth[i].value/ (float)berth[i].transport_time>max){
-                id =i; max = (float)berth[i].value/ (float)berth[i].transport_time;
-        }
-        num = 0;
-        time = nowtime+ berth[id].transport_time;
-        status =0,pos = id;
-    }
-
-    //去泊点的状态转移
-    if(pos!=-1&&time==nowtime){
-        if(berth[pos].boatid==-1) status = 1;
-        else{
-            status = 2;
-            berth[pos].waiting.push(id);
-        }
-    }
-}*/
 void Boat::move(int nowtime,int boat_capacity,Berth* berth){
-    if(nowtime%1000==0)
-        fprintf(stderr,"%d %d \n",id,berth_id);
     if(status==0) return;//船现在不能移动
     if(status==2&&berth_id!=-1){
         printf("ship %d %d\n",id,berth_id);

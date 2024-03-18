@@ -53,7 +53,6 @@ public:
 
     void move(Dot dotmap[][210], Berth *berth);                                    //输出移动
     //调试用函数
-    void move(Dot[201]);
 
 };
 class Step
@@ -151,16 +150,7 @@ void Robot::find_good(Dot dotmap[][210]) {
                 tar_y=ny;
                 find=1;
                 this->direc=dis[nowx][nowy];
-            }//找到了方向
-            // if(find==1&&*zhen%1000==0){
-            //     fprintf(stderr,"x:%d y:%d\n",x,y);
-            //     fprintf(stderr,"tar_x:%d tar_y:%d type:%d direc:%d\n",nx,ny,dotmap[tar_x][tar_y].type,direc);
-            //     for(int k=max((x-abs(tar_x-x)),1);k<=min(x+abs(tar_x-x),200);k++){
-            //         for(int j=max(1,y-abs(y-tar_y));j<=min(200,y+abs(y-tar_y));j++)
-            //             fprintf(stderr,"%d ",dotmap[k][j].type);
-            //         fprintf(stderr,"\n");
-            //     }
-            // }
+            }
             s[nx][ny]=1;
             q.push(make_pair(nx,ny));
         }
@@ -176,7 +166,7 @@ void Robot::find_berth(Berth *berth) {
             if(berth[i].dis[x][y]<minn){
                  berth_id=i,minn=berth[i].dis[x][y];
                  //
-                 if(addvalue==1) berth[berth_id].gl.total_val+=g->val,addvalue=0;
+                 if(addvalue==1) berth[berth_id].gl.f_val+=g->val,addvalue=0;
             }
         }
     }
@@ -209,7 +199,7 @@ void Robot::operate(Dot dotmap[][210], Berth* berth) {
           berth[berth_id].gl.push(g);
         //
         addvalue=1;
-        berth[berth_id].gl.total_val-=g->val;
+        berth[berth_id].gl.f_val-=g->val;
         //
         g=NULL;
         this->berth_id=-1;

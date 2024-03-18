@@ -4,16 +4,18 @@
 
 struct GoodListNode{
     //Good* g;
-    int val;
+    int val=0;
     GoodListNode *next;
 };
 struct GoodList{
-    GoodListNode *front;
+    public:
+    GoodListNode *front,*end;
     int size=0;
-    int total_val;
+    int total_val=0;//已经到达港口的货物值
+    int f_val=0;//预期到达港口的货物值
     GoodList(){
         front=new GoodListNode;
-        front->next=NULL;
+        end=NULL;
     }
     void push(Good *new_good){//放入
         if(new_good==NULL) return;
@@ -21,17 +23,22 @@ struct GoodList{
         size++;
         total_val+=new_good->val;
         gln->val=new_good->val;
-        gln->next=front->next;
-        front->next=gln;
+        fprintf(stderr,"%d %d %d \n",size,total_val,gln->val);
+        if(size==1){
+            front->next=gln;
+            end=gln;
+            return;
+        }
+        end->next=gln;
+        end=gln;
     }
     void pop(){//弹出
         if(size==0) return;
         size--; 
-        front->next=(front->next)->next;
-        //int good_val=(front->next)->val;
-        //total_val-=good_val;
-        return;
-        delete(front->next);
+        GoodListNode* g=front->next;
+        total_val-=g->val;
+        front->next=g->next;
+        delete(g);
         return;
     }
 };

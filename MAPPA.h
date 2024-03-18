@@ -181,24 +181,13 @@ int MAPPA::input(){//读入交互
         robot[i].x+=1;
         robot[i].y+=1;
         robot[i].zhen=&(this->zhen);
-        // if(robot[i].state==0){
-        // 	fprintf(stderr,"aaaaaa\n");
-        // 	fprintf(stderr,"%d %d %d\n",d[robot[i].x][robot[i].y].type,robot[i].x,robot[i].y);
-        // 	fprintf(stderr,"%d %d %d\n",d[robot[i].x+1][robot[i].y].type,robot[i].x,robot[i].y);
-        // 	fprintf(stderr,"%d %d %d\n",d[robot[i].x-1][robot[i].y].type,robot[i].x,robot[i].y);
-        // 	fprintf(stderr,"%d %d %d\n",d[robot[i].x][robot[i].y+1].type,robot[i].x,robot[i].y);
-        // 	fprintf(stderr,"%d %d %d\n",d[robot[i].x][robot[i].y-1].type,robot[i].x,robot[i].y);
-        // }调试用
-        //调整坐标适应地图
     }
     for(int i = 0; i < 5; i ++){
         if(boat[i].berth_id!=-1)
             berth[boat[i].berth_id].boatid = -1;
         scanf("%d%d\n", &boat[i].status, &boat[i].berth_id);
-        //
         if(boat[i].berth_id!=-1)
             berth[boat[i].berth_id].boatid = i;
-        //
     }
     char okk[100];
     scanf("%s", okk);
