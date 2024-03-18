@@ -157,7 +157,7 @@ CMAKE_PROJECT_DESCRIPTION:STATIC=
 CMAKE_PROJECT_HOMEPAGE_URL:STATIC=
 
 //Value Computed by CMake
-CMAKE_PROJECT_NAME:STATIC=wyl_git
+CMAKE_PROJECT_NAME:STATIC=main
 
 //Path to a program.
 CMAKE_RANLIB:FILEPATH=C:/Users/93211/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8214.51/bin/mingw/bin/ranlib.exe
@@ -238,6 +238,15 @@ CMAKE_STRIP:FILEPATH=C:/Users/93211/AppData/Local/JetBrains/Toolbox/apps/CLion/c
 // during the make.  This is useful for debugging only. With Visual
 // Studio IDE projects all commands are done without /nologo.
 CMAKE_VERBOSE_MAKEFILE:BOOL=FALSE
+
+//Value Computed by CMake
+main_BINARY_DIR:STATIC=C:/Users/93211/Desktop/wyl_git/cmake-build-debug
+
+//Value Computed by CMake
+main_IS_TOP_LEVEL:STATIC=ON
+
+//Value Computed by CMake
+main_SOURCE_DIR:STATIC=C:/Users/93211/Desktop/wyl_git
 
 //Value Computed by CMake
 wyl_git_BINARY_DIR:STATIC=C:/Users/93211/Desktop/wyl_git/cmake-build-debug

@@ -27,7 +27,7 @@
 					[
 						0
 					],
-					"name" : "wyl_git",
+					"name" : "main",
 					"targetIndexes" : 
 					[
 						0
@@ -38,9 +38,9 @@
 			[
 				{
 					"directoryIndex" : 0,
-					"id" : "wyl_git::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-wyl_git-Debug-d74a672256c2c9fcca52.json",
-					"name" : "wyl_git",
+					"id" : "main::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-main-Debug-11bc32a53c41adfc27f3.json",
+					"name" : "main",
 					"projectIndex" : 0
 				}
 			]

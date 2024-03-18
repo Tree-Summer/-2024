@@ -11,7 +11,7 @@
 # =============================================================================
 
 # =============================================================================
-# Project: wyl_git
+# Project: main
 # Configurations: Debug
 # =============================================================================
 
@@ -41,61 +41,37 @@ include CMakeFiles/rules.ninja
 
 cmake_ninja_workdir = C$:/Users/93211/Desktop/wyl_git/cmake-build-debug/
 # =============================================================================
-# Object build statements for EXECUTABLE target wyl_git
+# Object build statements for EXECUTABLE target main
 
 
 #############################################
-# Order-only phony target for wyl_git
+# Order-only phony target for main
 
-build cmake_object_order_depends_target_wyl_git: phony || CMakeFiles/wyl_git.dir
+build cmake_object_order_depends_target_main: phony || CMakeFiles/main.dir
 
-build CMakeFiles/wyl_git.dir/main.cpp.obj: CXX_COMPILER__wyl_git_Debug C$:/Users/93211/Desktop/wyl_git/main.cpp || cmake_object_order_depends_target_wyl_git
-  DEP_FILE = CMakeFiles\wyl_git.dir\main.cpp.obj.d
+build CMakeFiles/main.dir/main.cpp.obj: CXX_COMPILER__main_Debug C$:/Users/93211/Desktop/wyl_git/main.cpp || cmake_object_order_depends_target_main
+  DEP_FILE = CMakeFiles\main.dir\main.cpp.obj.d
   FLAGS = -g -fdiagnostics-color=always
-  OBJECT_DIR = CMakeFiles\wyl_git.dir
-  OBJECT_FILE_DIR = CMakeFiles\wyl_git.dir
-
-build CMakeFiles/wyl_git.dir/robot.cpp.obj: CXX_COMPILER__wyl_git_Debug C$:/Users/93211/Desktop/wyl_git/robot.cpp || cmake_object_order_depends_target_wyl_git
-  DEP_FILE = CMakeFiles\wyl_git.dir\robot.cpp.obj.d
-  FLAGS = -g -fdiagnostics-color=always
-  OBJECT_DIR = CMakeFiles\wyl_git.dir
-  OBJECT_FILE_DIR = CMakeFiles\wyl_git.dir
-
-build CMakeFiles/wyl_git.dir/boat.cpp.obj: CXX_COMPILER__wyl_git_Debug C$:/Users/93211/Desktop/wyl_git/boat.cpp || cmake_object_order_depends_target_wyl_git
-  DEP_FILE = CMakeFiles\wyl_git.dir\boat.cpp.obj.d
-  FLAGS = -g -fdiagnostics-color=always
-  OBJECT_DIR = CMakeFiles\wyl_git.dir
-  OBJECT_FILE_DIR = CMakeFiles\wyl_git.dir
-
-build CMakeFiles/wyl_git.dir/MAPPA.cpp.obj: CXX_COMPILER__wyl_git_Debug C$:/Users/93211/Desktop/wyl_git/MAPPA.cpp || cmake_object_order_depends_target_wyl_git
-  DEP_FILE = CMakeFiles\wyl_git.dir\MAPPA.cpp.obj.d
-  FLAGS = -g -fdiagnostics-color=always
-  OBJECT_DIR = CMakeFiles\wyl_git.dir
-  OBJECT_FILE_DIR = CMakeFiles\wyl_git.dir
-
-build CMakeFiles/wyl_git.dir/berth.cpp.obj: CXX_COMPILER__wyl_git_Debug C$:/Users/93211/Desktop/wyl_git/berth.cpp || cmake_object_order_depends_target_wyl_git
-  DEP_FILE = CMakeFiles\wyl_git.dir\berth.cpp.obj.d
-  FLAGS = -g -fdiagnostics-color=always
-  OBJECT_DIR = CMakeFiles\wyl_git.dir
-  OBJECT_FILE_DIR = CMakeFiles\wyl_git.dir
+  OBJECT_DIR = CMakeFiles\main.dir
+  OBJECT_FILE_DIR = CMakeFiles\main.dir
 
 
 # =============================================================================
-# Link build statements for EXECUTABLE target wyl_git
+# Link build statements for EXECUTABLE target main
 
 
 #############################################
-# Link the executable wyl_git.exe
+# Link the executable main.exe
 
-build wyl_git.exe: CXX_EXECUTABLE_LINKER__wyl_git_Debug CMakeFiles/wyl_git.dir/main.cpp.obj CMakeFiles/wyl_git.dir/robot.cpp.obj CMakeFiles/wyl_git.dir/boat.cpp.obj CMakeFiles/wyl_git.dir/MAPPA.cpp.obj CMakeFiles/wyl_git.dir/berth.cpp.obj
+build main.exe: CXX_EXECUTABLE_LINKER__main_Debug CMakeFiles/main.dir/main.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
-  OBJECT_DIR = CMakeFiles\wyl_git.dir
+  OBJECT_DIR = CMakeFiles\main.dir
   POST_BUILD = cd .
   PRE_LINK = cd .
-  TARGET_FILE = wyl_git.exe
-  TARGET_IMPLIB = libwyl_git.dll.a
-  TARGET_PDB = wyl_git.exe.dbg
+  TARGET_FILE = main.exe
+  TARGET_IMPLIB = libmain.dll.a
+  TARGET_PDB = main.exe.dbg
 
 
 #############################################
@@ -123,7 +99,7 @@ build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 # =============================================================================
 # Target aliases.
 
-build wyl_git: phony wyl_git.exe
+build main: phony main.exe
 
 # =============================================================================
 # Folder targets.
@@ -133,7 +109,7 @@ build wyl_git: phony wyl_git.exe
 #############################################
 # Folder: C:/Users/93211/Desktop/wyl_git/cmake-build-debug
 
-build all: phony wyl_git.exe
+build all: phony main.exe
 
 # =============================================================================
 # Built-in targets
