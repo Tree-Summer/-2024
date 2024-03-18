@@ -21,7 +21,7 @@ class MAPPA{
 		int boat_capacity;
 
         //
-        // fstream file;
+        fstream file;
         //
 
 		GoodsManager gm;

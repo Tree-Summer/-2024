@@ -12,7 +12,7 @@ int main()
         int id=m->input();
 //        int id = Input();//
         m->deal();//
-        zhen=id;
+        //zhen=id;
         fflush(stdout);
     }
     return 0;

@@ -12,10 +12,3 @@ void renew(Boat *boat,Berth *berth){
     }
 }
 
-void updateboatandberth(pair<int,int> q,Boat *boat,Berth *berth){
-    if(q.first!=-1){
-    //    berth[q.first].space--;
-    //    berth[q.first].value-=q.second;
-        boat[berth[q.first].boatid].num++;
-    }
-}

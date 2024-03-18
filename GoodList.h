@@ -3,7 +3,8 @@
 #include"Good.h"
 
 struct GoodListNode{
-    Good* g;
+    //Good* g;
+    int val;
     GoodListNode *next;
 };
 struct GoodList{
@@ -19,17 +20,18 @@ struct GoodList{
         GoodListNode *gln=new GoodListNode;
         size++;
         total_val+=new_good->val;
-        gln->g=new_good;
+        gln->val=new_good->val;
         gln->next=front->next;
         front->next=gln;
     }
     void pop(){//弹出
         if(size==0) return;
+        size--; 
         front->next=(front->next)->next;
-        Good* good=(front->next)->g;
-        total_val-=good->val;
+        //int good_val=(front->next)->val;
+        //total_val-=good_val;
+        return;
         delete(front->next);
-        size--;
         return;
     }
 };

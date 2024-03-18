@@ -14,6 +14,7 @@ public:
     int x;
     int y;
     int carry;//robot是否携带货物
+    int addvalue;//robot是否携带货物
     int state;//robot是否是正常状态
     int tar_x;
     int tar_y;
@@ -28,6 +29,7 @@ public:
     Robot(){
         carry=0;
         state=1;
+        addvalue = 0;
         dis=new int*[210];//表示方向
         for(int i=0;i<210;i++)
             dis[i]=new int[210];
@@ -165,14 +167,19 @@ void Robot::find_good(Dot dotmap[][210]) {
         }
     }
 }
+
+
 void Robot::find_berth(Berth *berth) {
     direc=-1;
     int minn=40001;
     string road;
     if(berth_id<0||berth_id>9){
         for(int i=0;i<=9;i++){
-            if(berth[i].dis[x][y]<minn)
-                berth_id=i,minn=berth[i].dis[x][y];
+            if(berth[i].dis[x][y]<minn){
+                 berth_id=i,minn=berth[i].dis[x][y];
+                 //
+                 if(addvalue==1) berth[berth_id].gl.total_val+=g->val,addvalue=0;
+            }
         }
     }
     //0:右边，1：左边，2：上面，3：下面
@@ -188,19 +195,24 @@ void Robot::find_berth(Berth *berth) {
 
 void Robot::operate(Dot dotmap[][210], Berth* berth) {
     if(dotmap[this->x][this->y].type == 3 && this->carry == 0){
-        printf("get ");
-        printf("%d\n", this->id);
+        printf("get %d\n",this->id);
+        fflush(stdout);
         g=dotmap[x][y].good;
         // if(g!=NULL)
-//             fprintf(stderr,"%d %d\n",g->time,g->val);
+        //     fprintf(stderr,"%d %d\n",g->time,g->val);
         dotmap[this->x][this->y].changetype(0);
         tar_x=-1,tar_y=-1;
     }
     else if(dotmap[this->x][this->y].type == 4 && this->carry == 1){
         printf("pull ");
         printf("%d\n", this->id);
-        //if(g!=NULL)
-        //   berth[berth_id].gl.push(g);
+        
+        if(g!=NULL)
+          berth[berth_id].gl.push(g);
+        //
+        addvalue=1;
+        berth[berth_id].gl.total_val-=g->val;
+        //
         g=NULL;
         this->berth_id=-1;
         tar_x=-1,tar_y=-1;

@@ -13,7 +13,7 @@ class Berth
     int loading_speed;//装货速度
     int boatid;//目前在泊位上的船的id
     int f_value;//泊位将来回到达的value最大值
-    //int space=2;//在泊位上有多少船的空位
+    int space;//在泊位上有多少船的空位
     queue<int> waiting;//正在等待的船
     const int maxn=40001; 
     int** dis;

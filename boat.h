@@ -24,40 +24,57 @@ class Boat
 void Boat::ship(int nowtime,int boat_capacity,Berth *berth){
 
     int max = -1;
-    int maxid=-1;
-    if(berth[berth_id].gl.total_val==0){
+    int maxid = -1;
+    if(berth_id==-1){
         for(int i = 0;i < 10;i++){
-            if( berth[i].gl.total_val>max&&berth[i].boatid==-1){
+            if( berth[i].gl.total_val>max&&berth[i].space<=0){
                 maxid =i; max = berth[i].gl.total_val;
             }
         }
-    }
-    berth[berth_id].boatid=-1;
-    berth[maxid].boatid=id;
+        berth[maxid].boatid=id;
+        berth_id = maxid;
+        berth[berth_id].space+= boat_capacity;
 
-    berth_id = maxid;
-    time = nowtime+ 500;
-    status =0;
-    time = nowtime + 1000;
-    printf("ship %d %d\n",id,berth_id);
+        time = nowtime+ 500;
+        if(berth_id==-1) return;
+        printf("ship %d %d\n",id,berth_id);
+        return;
+    }else if(berth_id!=-1&& berth[berth_id].gl.total_val==0 &&berth[berth_id].gl.size==0 && num!=boat_capacity){
+            for(int i = 0;i < 10;i++){
+                if( berth[i].gl.total_val>max&&berth[i].space<=0){
+                    maxid = i; max = berth[i].gl.total_val;
+                }
+            }
+            if(maxid == -1) return;
+            else{
+            berth[berth_id].boatid=-1;
+            berth[maxid].boatid=id;
+            
+            berth[berth_id].space-= boat_capacity - num;
+            berth_id = maxid;
+            berth[berth_id].space+= boat_capacity - num;
+
+            time = nowtime+ 500;
+            if(berth_id==-1) return;
+
+            printf("ship %d %d\n",id,berth_id);
+            return;
+            }
+    }else{
+        return;
+    }
 }
 
+
 // go to virtual point
-/*
-void Boat::go(int nowtime,int boat_capacity,Berth *berth){
-    if(num==boat_capacity||(nowtime+berth[berth_id].transport_time==15000)){
-        time = nowtime +berth[pos].transport_time;
-        berth[berth_id].boatid = -1;
-        status =0,berth_id =-1;
-    }
-}*/
 void Boat::load(Berth* berth,int boat_capacity,int nowtime){
     int k=min(boat_capacity-num,berth[berth_id].gl.size);
+    if(berth[berth_id].gl.size==0) ship(nowtime,boat_capacity,berth);
     for(int i=1;i<=k;i++){
         berth[berth_id].gl.pop();
     }
     num+=k;
-    if(num==boat_capacity||15000-nowtime<=1000){
+    if(num==boat_capacity||15000-nowtime<=berth[berth_id].transport_time){
         berth[berth_id].boatid=-1;
         berth_id=-1;
         printf("go %d\n",id);
@@ -96,6 +113,8 @@ void Boat::statuschange(int nowtime,int boat_capacity,Berth *berth){
     }
 }*/
 void Boat::move(int nowtime,int boat_capacity,Berth* berth){
+    if(nowtime%1000==0)
+        fprintf(stderr,"%d %d \n",id,berth_id);
     if(status==0) return;//船现在不能移动
     if(status==2&&berth_id!=-1){
         printf("ship %d %d\n",id,berth_id);

@@ -24,9 +24,6 @@ class Dot{
 			type=0;
 		}
 		void changetype(int type){
-//			if(this->type==3&&good!=NULL) delete(good);
-//			if(this->type==4&&berth!=NULL) delete(berth);
-//			if(this->type==5&&boat!=NULL) delete(boat);
 			this->type=type;
 		}
 };
