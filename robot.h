@@ -168,10 +168,10 @@ void Robot::find_berth(Berth *berth) {
             if(berth[i].dis[x][y]<minn){
                  berth_id=i,minn=berth[i].dis[x][y];
                  //
-                 if(addvalue==1) berth[berth_id].gl.f_val+=g->val,addvalue=0;
             }
         }
     }
+    if(addvalue==1) berth[berth_id].gl.f_val+=g->val,addvalue=0;
     //0:右边，1：左边，2：上面，3：下面
     int X[4]={0,0,-1,1},Y[4]={1,-1,0,0};
     for(int i=0;i<=3;i++)

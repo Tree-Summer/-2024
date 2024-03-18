@@ -220,18 +220,31 @@ void MAPPA::deal(){//处理拿取货物
         if(robot[i].direc!=-1 && robot[i].state==1) {
             int x_next = robot[i].x + X[robot[i].direc];
             int y_next = robot[i].y + Y[robot[i].direc];
-            for (int j = 0; j < robot_num; j++) {
+            for (int j = 0; j <i; j++) {
+                if(robot[i].x==robot[j].x&&robot[i].y==robot[j].y){flag=0;break;}
                 if (robot[j].x == x_next && robot[j].y==y_next) {flag=0;break;}
             }
         }
         if(robot[i].direc!=-1 && flag==1 && robot[i].state==1)
             robot[i].move(d, berth);
-        else if(robot[i].direc!=-1 && flag==0 && robot[i].state==1) {
+        else if(flag==0 && robot[i].state==1) {
             for (int dir = 0; dir < 4; dir++) {
                 int x_next = robot[i].x + X[dir];
                 int y_next = robot[i].y + Y[dir];
                 int sign = 1;
-                for (int j = 0; j < robot_num; j++) {
+                for (int j = 0; j < i; j++) {
+                    if(robot[j].x==robot[i].x&&robot[j].y==robot[i].y){
+                        if(robot[j].direc==0&&dir==1)
+                            sign=0;
+                        if(robot[j].direc==2&&dir==3)
+                            sign=0;
+                        if(robot[j].direc==1&&dir==0)
+                            sign=0;
+                        if(robot[j].direc==3&&dir==2)
+                            sign=0;
+                    }
+                    if(!robot[i].able_to_move(d,x_next,y_next)) 
+                        sign=0;
                     if (robot[j].x == x_next && robot[j].y == y_next) {
                         sign = 0;
                         break;
@@ -246,7 +259,6 @@ void MAPPA::deal(){//处理拿取货物
         }
         fprintf(stderr, "time:%d id:%d x:%d y:%d state:%d direc:%d\n", zhen, robot[i].id, robot[i].x, robot[i].y, robot[i].state, robot[i].direc);
     }
-    //file.close();
     // 调用船函数
     for(int i=0;i<boat_num;i++){
         boat[i].move(zhen,boat_capacity,berth);

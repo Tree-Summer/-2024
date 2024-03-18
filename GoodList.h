@@ -23,7 +23,6 @@ struct GoodList{
         size++;
         total_val+=new_good->val;
         gln->val=new_good->val;
-        fprintf(stderr,"%d %d %d \n",size,total_val,gln->val);
         if(size==1){
             front->next=gln;
             end=gln;
@@ -33,6 +32,7 @@ struct GoodList{
         end=gln;
     }
     void pop(){//弹出
+        //fprintf(stderr,"%d %d \n",size,total_val);
         if(size==0) return;
         size--; 
         GoodListNode* g=front->next;
