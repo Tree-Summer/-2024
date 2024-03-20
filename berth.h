@@ -14,6 +14,8 @@ class Berth
     int boatid;//目前在泊位上的船的id
     int f_value;//泊位将来回到达的value最大值
     int space;//在泊位上有多少船的空位
+    double trans_v=0;//衡量泊位是否值得驶向的指标
+    //trans_v=good_value*k*transport_time/dis
     queue<int> waiting;//正在等待的船
     const int maxn=40001; 
     int** dis;

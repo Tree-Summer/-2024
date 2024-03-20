@@ -1,10 +1,12 @@
 #include<iostream>
 #include "MAPPA.h"
+#include<ctime>
 using namespace std;
 
 
 int main()
 {
+    srand(time(0));
     FILE *stream=freopen("freopen.out","w",stderr);
     MAPPA* m=new MAPPA;
     m->init();

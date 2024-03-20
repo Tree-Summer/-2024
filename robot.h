@@ -18,6 +18,7 @@ public:
     int state;//robot是否是正常状态
     int tar_x;
     int tar_y;
+    int tar_good=0;//等于1表示有目标货物，0表示没有
     int berth_id;
     int direc;
     int **dis;
@@ -55,17 +56,7 @@ public:
     //调试用函数
 
 };
-class Step
-{
-public:
-    int x, y, dist;
 
-    Step(int x, int y, int dist){
-        this->x = x;
-        this->y = y;
-        this->dist = dist;
-    }
-};
 #endif
 
 void Robot::change_dir(Dot (*dotmap)[210], Berth *berth) {
@@ -84,14 +75,6 @@ void Robot::move(Dot dotmap[][210], Berth *berth){
     operate(dotmap, berth);
 }
 
-bool beside(Step* a, Step* b){ //判断相邻
-    if(abs(a->x - b->x) + abs(a->y - b->y) == 1)
-        return true;
-    else
-        return false;
-
-}
-
 bool Robot::able_to_move(Dot dotmap[][210], int x,int y ){
     if(x==0||x>200) return 0;
     if(y==0||y>200) return 0;
@@ -108,18 +91,12 @@ void Robot::find_good(Dot dotmap[][210]) {
         for(int j=1;j<=200;j++)
             dis[i][j]=-1;
     queue<pair<int,int> > q;
-    int find=0;//表示是否找到最近的货物
+    int find=0,k=0;//表示是否找到最近的货物
     memset(s,0,sizeof(s));
     s[x][y]=1;
     int X[4]={0,0,-1,1},Y[4]={1,-1,0,0};
-    // if(*zhen%1000==0){
-    //         fprintf(stderr,"out\nzhen:%d\n x:%d y:%d id:%d\n",*zhen,x,y,id);
-    //     }
     for(int i=0;i<4;i++){
         if(!able_to_move(dotmap, x+X[i],y+Y[i])) continue;
-        // if(*zhen%1000==0){
-        //     fprintf(stderr,"dis:%d\n x:%d y:%d\n",i,x+X[i],y+Y[i]);
-        // }
         if(dotmap[x+X[i]][y+Y[i]].type==3){
             this->direc=i;
             return;
@@ -128,34 +105,39 @@ void Robot::find_good(Dot dotmap[][210]) {
         s[x+X[i]][y+Y[i]]=1;
         q.push(make_pair(x+X[i],y+Y[i]));
     }
-    while(!q.empty()&&!find){
+    int maxval=50,kk=13;//广搜过程中货物最大值
+    while(!q.empty()&&find<kk){
         int nowx=q.front().first;
         int nowy=q.front().second;
+        k++;
         q.pop();
-        // if(*zhen%1000==0){
-        //     fprintf(stderr,"%d %d %d\n",nowx,nowy,dis[nowx][nowy]);
-        // }
         for(int i=0;i<4;i++){
             int nx=nowx+X[i];
             int ny=nowy+Y[i];//下一步的坐标
-            if(nx<1||nx>200||ny<0||ny>200) continue;//越界则返回
+            if(nx<1||nx>200||ny<1||ny>200) continue;//越界则返回
             if(s[nx][ny]) continue;//到过说明入队了也返回
             if(dotmap[nx][ny].type==1||dotmap[nx][ny].type==2) continue;//不能走也返回
             dis[nx][ny]=dis[nowx][nowy];//新扩展的是原方向走的
-            if(nx==tar_x&&y==tar_y){
-                find=1;
+            if(nx==tar_x&&ny==tar_y){
                 this->direc=dis[nowx][nowy];
+                find=kk+1;
+                tar_good=1;
             }
-            if(dotmap[nx][ny].type==3){
+            if(dotmap[nx][ny].type==3&&!tar_good){
+                find++;
+                if((dotmap[nx][ny].good->val)<maxval) continue;
                 tar_x=nx;
                 tar_y=ny;
-                find=1;
+                maxval=dotmap[nx][ny].good->val;
                 this->direc=dis[nowx][nowy];
             }
             s[nx][ny]=1;
             q.push(make_pair(nx,ny));
         }
     }
+    tar_good=0;
+    if(direc==-1) direc=abs(rand())%4;
+    while(!q.empty()) q.pop();
 }
 
 
@@ -165,9 +147,17 @@ void Robot::find_berth(Berth *berth) {
     string road;
     if(berth_id<0||berth_id>9){
         for(int i=0;i<=9;i++){
-            if(berth[i].dis[x][y]<minn){
+            if(berth[i].dis[x][y]<minn&&berth[i].boatid!=-1){
                  berth_id=i,minn=berth[i].dis[x][y];
                  //
+            }
+        }
+    }
+    if(berth_id==-1){
+        int minn=40001;
+        for(int i=0;i<=9;i++){
+            if(berth[i].dis[x][y]<minn){
+                 berth_id=i,minn=berth[i].dis[x][y];
             }
         }
     }
@@ -188,6 +178,10 @@ void Robot::operate(Dot dotmap[][210], Berth* berth) {
         printf("get %d\n",this->id);
         fflush(stdout);
         g=dotmap[x][y].good;
+        if(g==NULL) return;
+        for(int i=0;i<10;i++){
+            berth[i].trans_v-=(g->val)*berth[i].loading_speed/berth[i].dis[x][y];
+        }//拿去货物后调整泊位竞争值
         // if(g!=NULL)
         //     fprintf(stderr,"%d %d\n",g->time,g->val);
         dotmap[this->x][this->y].changetype(0);
@@ -197,8 +191,9 @@ void Robot::operate(Dot dotmap[][210], Berth* berth) {
         printf("pull ");
         printf("%d\n", this->id);
         
-        if(g!=NULL)
+        if(g!=NULL){
           berth[berth_id].gl.push(g);
+        }
         //
         addvalue=1;
         berth[berth_id].gl.f_val-=g->val;
@@ -211,7 +206,7 @@ void Robot::operate(Dot dotmap[][210], Berth* berth) {
 
 void Robot::move(Dot dotmap[][210]){
     int Y[4]={1,-1,0,0},X[4]={0,0,-1,1};
-    if(direc==-1) return;
+    if(direc<0) return;
     if(!able_to_move(dotmap, x+X[direc],y+Y[direc]))
         return;
     printf("move ");

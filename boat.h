@@ -6,6 +6,7 @@
 class Boat
 {
     public:
+    int not_load=0;
     int id;//beat's id
     int num;//num of goods
     int berth_id;//bowei id
@@ -28,7 +29,7 @@ void Boat::ship(int nowtime,int boat_capacity,Berth *berth){
     if(berth_id==-1){
         for(int i = 0;i < 10;i++){
             //if( berth[i].gl.total_val>max&&berth[i].space<=0){ 注释掉这里。应该这里有错
-            if(berth[i].gl.f_val>max&&berth[i].boatid==-1){
+            if((berth[i].gl.total_val+berth[i].gl.f_val)+berth[i].trans_v>max&&berth[i].boatid==-1){
                 maxid =i; max = berth[i].gl.total_val;
             }
         }
@@ -63,7 +64,13 @@ void Boat::ship(int nowtime,int boat_capacity,Berth *berth){
 // go to virtual point
 void Boat::load(Berth* berth,int boat_capacity,int nowtime){
     int k=min(boat_capacity-num,berth[berth_id].gl.size);
-    if(berth[berth_id].gl.size==0) ship(nowtime,boat_capacity,berth);
+    if(berth[berth_id].gl.size==0){
+        not_load++;
+        if(not_load>15){
+            not_load=0;
+            ship(nowtime,boat_capacity,berth);
+        }
+    }
     for(int i=1;i<=k;i++){
         berth[berth_id].gl.pop();
     }

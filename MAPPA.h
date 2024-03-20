@@ -167,13 +167,15 @@ int MAPPA::input(){//读入交互
         if(d[x][y].type!=0) continue;
         //生成在不能取的位置则不去
         gm.end++;
-        gm.end=gm.end%gm.size;
         gm.G[gm.end].x=x;
         gm.G[gm.end].y=y;
         gm.G[gm.end].time=zhen;
         gm.G[gm.end].val=val;
         d[x][y].type=3;
         d[x][y].good=gm.G+gm.end;//货物对应的点指向货物
+        for(int j=0;j<berth_num;j++){
+            berth[j].trans_v+=(double)val*berth[j].loading_speed/berth[j].dis[x][y];
+        }//更新各个泊位的比较值
     }
     for(int i = 0; i < robot_num; i ++)
     {
@@ -198,15 +200,23 @@ void MAPPA::vanish(){//货物消失逻辑,采用循环的队列
     // if(zhen%100-15<=0){
     // 	fprintf(stderr,"%d %d\n",gm.front,gm.end);
     // }调试用，大概率正常
-    for(int i=gm.front;i!=gm.end;i++){
-        i=i%gm.size;
-        int x=gm.G[i].x,y=gm.G[i].y;
-        if(zhen-gm.G[i].time>=1000){
-            d[x][y].changetype(0);
-            gm.front++;
-            gm.front=gm.front%gm.size;
+    //fprintf(stderr,"%d %d\n",gm.front,gm.end);
+    int h=gm.front;
+    while(gm.front<=gm.end&&gm.front<2000){
+        int x=gm.G[h].x,y=gm.G[h].y;
+        if(d[x][y].type!=3){
+            break;
         }
-        else break;
+        if(zhen-gm.G[h].time>=1000){
+            for(int j=1;j<10;j++){
+                berth[j].trans_v-=gm.G[h].val*berth[j].loading_speed/berth[j].dis[x][y];
+            }
+            d[x][y].type=0;
+            gm.front++;
+            h=gm.front;
+        }
+        else
+            break;
     }
 }
 void MAPPA::deal(){//处理拿取货物

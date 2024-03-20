@@ -3,12 +3,13 @@
 #include "Good.h"
 class GoodsManager{
 	public:
-		int front,end;
+		int front=0,end=0;
 		GoodsManager(){
-			front=0;
+			front=1;
 			end=0;
+			G=new Good[100005];
 		}
-		Good G[10005];
-		const int size=10001;
+		Good *G;
+		const int size=100001;
 };
 #endif
